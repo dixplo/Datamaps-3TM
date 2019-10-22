@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/test/")
 public class testController {
-	
+
 	@GetMapping("hello")
 	public @ResponseBody String helloW(){
 		return "Hello Wolrd !";
+	}
+	
+	@GetMapping("")
+	public String maps(){
+		return "index";
 	}
 }
