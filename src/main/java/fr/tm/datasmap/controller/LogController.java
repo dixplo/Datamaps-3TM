@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import io.github.jeemv.springboot.vuejs.VueJS;
 
 @Controller
-@RequestMapping("/connec/")
+@RequestMapping("/interface/")
 public class LogController {
 
 	@Autowired
@@ -18,6 +18,6 @@ public class LogController {
 	@GetMapping("")
 	public String connex(ModelMap map) {
 		map.put("vue",vue);
-		return "conn/login";
+		return "index";
 	}
 }

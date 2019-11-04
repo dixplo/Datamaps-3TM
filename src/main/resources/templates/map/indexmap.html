@@ -1,6 +1,7 @@
 {{> header}}
+<v-container fluid class="mapsPadding">
 <v-app-bar app color="indigo" dark>
-  <v-toolbar-title>Titre</v-toolbar-title>
+  <v-toolbar-title>Barre de recherche cheloue de thomas</v-toolbar-title>
   <v-spacer></v-spacer>
   {{> conn/login}}
 </v-app-bar>
@@ -27,5 +28,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCylivG9YJHml-7mvUOMqzccY54UrgO1r8&callback=initMap"
         async defer>
   </script>
+  </v-container>
 {{> footer}}
 {{{vue}}}
