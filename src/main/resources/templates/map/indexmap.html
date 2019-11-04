@@ -1,3 +1,28 @@
+
 {{> header}}
 
+  <div id="map"> </div>
+  <script>
+    function initMap() {
+      var option = {
+        zoom:14,
+        center:{lat:49.183333, lng:-0.350000}
+      }
+      // Creation de la carte avec le parametre objet map
+      var map = new google.maps.Map(document.getElementById('map'),option);
+
+      // Creation D'un marqeur
+
+      var marker = new google.maps.Marker({
+        position:{lat:49.2013316,lng:-0.3843974},
+        map:map,
+        icon:'worldwide-location.png'
+      });
+
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCylivG9YJHml-7mvUOMqzccY54UrgO1r8&callback=initMap"
+        async defer>
+  </script>
 {{> footer}}
+{{{vue}}}

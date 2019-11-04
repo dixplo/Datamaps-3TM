@@ -1,38 +1,14 @@
-<<<<<<< HEAD
-        </v-container>
-    </v-content>
-</v-app>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.0.19/vuetify.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCylivG9YJHml-7mvUOMqzccY54UrgO1r8&callback=initMap" async defer></script>
-<script>
-  function initMap() {
-    var option = {
-      zoom:14,
-      center:{lat:49.183333, lng:-0.350000}
-    }
-    // Creation de la carte avec le parametre objet map
-    var map = new google.maps.Map(document.getElementById('map'),option);
-
-    // Creation D'un marqeur
-
-    var marker = new google.maps.Marker({
-      position:{lat:49.2013316,lng:-0.3843974},
-      map:map,
-      icon:'data:image/png;base64,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'
-    });
-
-  }
-</script>
-</body>
-=======
-        </v-container>
-    </v-content>
-</v-app>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.0.19/vuetify.min.js"></script>
-</body>
->>>>>>> fd60070d66f260a83b28d3e715fd6008cb227842
-</html>
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>AssMat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.0.19/vuetify.min.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css" type="text/css" media="screen"/>
+</head>
+<body>
+<v-app>
+  <v-content>
+    <v-container fluid>
