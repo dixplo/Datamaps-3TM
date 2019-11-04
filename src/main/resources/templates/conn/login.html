@@ -1,28 +1,22 @@
 <v-dialog v-model="dialog" max-width="800px">
-    <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark class="mb-2" v-on="on">Login</v-btn>
-    </template>
     <v-container>
-        <v-tabs :grow="true">
-            <v-tab>SÃ©lectionner</v-tab>
-            <v-tab-item :key="0">
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">Login Form</span>
-                    </v-card-title>
+        <v-tabs v-model="tab_connexion" :grow="true">
+            <v-tab>Login</v-tab>
+            <v-tab-item :key="0" :value="0">
+                <v-card flat tile>
                     <v-card-text>
                         <v-container>
-                            <v-form ref="form" v-model="valid" :lazy-validation="lazy">
+                            <v-form ref="form" v-model="validC" :lazy-validation="lazy">
                                 <v-row>
                                     <v-col>
-                                        <v-text-field v-model="editedItem.email" label="Email" outlined required
+                                        <v-text-field v-model="login.email" label="E-mail" outlined required
                                             :rules="EmailRules">
                                         </v-text-field>
                                     </v-col>
                                 </v-row>
                                 <v-row>
                                     <v-col>
-                                        <v-text-field v-model="editedItem.pwd" label="Password" outlined required
+                                        <v-text-field v-model="login.pwd" label="Password" outlined required
                                             :rules="PasswordRules">
                                         </v-text-field>
                                     </v-col>
@@ -33,29 +27,38 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1" text @click="canceldialog">Cancel</v-btn>
-                        <v-btn text @click="" :disabled="!valid" color="success">Login</v-btn>
+                        <v-btn text @click="connexionUser" :disabled="!validC" color="success">Login</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-tab-item>
-            <v-tab>CrÃ©er</v-tab>
-            <v-tab-item :key="1">
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">Login Form</span>
-                    </v-card-title>
+            <v-tab>Register</v-tab>
+            <v-tab-item :key="1" :value="1">
+                <v-card flat tile>
                     <v-card-text>
                         <v-container>
                             <v-form ref="form" v-model="valid" :lazy-validation="lazy">
                                 <v-row>
+                                    <v-col cols="12" md="6">
+                                        <v-text-field v-model="register.name" label="Name" outlined required
+                                            :rules="NameRules">
+                                        </v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" md="6">
+                                        <v-text-field v-model="register.fname" label="Firstname" outlined required
+                                            :rules="FnameRules">
+                                        </v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
                                     <v-col>
-                                        <v-text-field v-model="editedItem.email" label="Email" outlined required
+                                        <v-text-field v-model="register.email" label="E-mail" outlined required
                                             :rules="EmailRules">
                                         </v-text-field>
                                     </v-col>
                                 </v-row>
                                 <v-row>
                                     <v-col>
-                                        <v-text-field v-model="editedItem.pwd" label="Password" outlined required
+                                        <v-text-field v-model="register.pwd" label="Password" outlined required
                                             :rules="PasswordRules">
                                         </v-text-field>
                                     </v-col>
@@ -66,7 +69,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1" text @click="canceldialog">Cancel</v-btn>
-                        <v-btn text @click="" :disabled="!valid" color="success">Login</v-btn>
+                        <v-btn text @click="adduser" :disabled="!valid" color="success">Register</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-tab-item>

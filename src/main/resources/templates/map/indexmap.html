@@ -3,7 +3,10 @@
 <v-app-bar app color="indigo" dark>
   <v-toolbar-title>Barre de recherche cheloue de thomas</v-toolbar-title>
   <v-spacer></v-spacer>
+  <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showLogin">Login</v-btn>
+  <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showRegister">Register</v-btn>
   {{> conn/login}}
+  <div v-if="conn">{{> conn/contrue}}</div>
 </v-app-bar>
   <div id="map"></div>
   <script>

@@ -22,7 +22,7 @@ public class Cuser {
 	private Double lat;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Cevent> events;
-	
+
 
 	public Cuser(Long id, String name, String fname, String pwd,String email, Double lng, Double lat, List<Cevent> events) {
 		super();

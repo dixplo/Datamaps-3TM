@@ -21,21 +21,34 @@ public class MapController {
 		vue.addData("dialog", false);
 		vue.addData("save", true);
 		vue.addData("valid", true);
+		vue.addData("validC", true);
 		vue.addData("lazy", false);
-		vue.addDataRaw("editedItem", "{id:'', name:'', fname: '', pwd:'', email:''}");
+		vue.addData("tab_connexion", "0");
+		
+		vue.addData("conn", false);
+		vue.addDataRaw("user", "{fname:''}");
+		
+		vue.addDataRaw("login", "{pwd:'', email:''}");
+		vue.addDataRaw("register", "{id:'', name:'', fname: '', pwd:'', email:''}");
 
 		//regle du formulaire
-		vue.addDataRaw("EmailRules", "[v => !!v || 'Email is empty']");
+		vue.addDataRaw("NameRules", "[v => !!v || 'Name is empty']");
+		vue.addDataRaw("FnameRules", "[v => !!v || 'Firstname is empty']");
+		vue.addDataRaw("EmailRules", "[v => !!v || 'E-mail is empty', v => /.+@.+/. test(v) || 'E-mail must be valid']");
 		vue.addDataRaw("PasswordRules", "[v => !!v || 'Password is empty']");
 		//fin regle
 
-		vue.addMethod("addnounou", "let self=this;"+Http.post("/rest/nounou/", "self.editedItem", "if(self.save){self.items.push(response.data);}self.save=true;"
-				+ "self.editedItem={id:'', name:'', fname: '', pwd:'', email:''};"
-				+ "self.dialog=false;"));
-		vue.addMethod("deletenounou", "let $=' ';let self=this;"+Http.delete("'/rest/nounou/'+nounou.id+$", "self.items.splice(self.items.indexOf(nounou),1)"), "nounou");
-		vue.addMethod("editnounou", "this.editedItem=nounou; this.dialog=true; this.save=false;", "nounou");
+		vue.addMethod("adduser", "let self=this;"+Http.post("/rest/cuser/",(Object) "self.register", "self.dialog=false;"
+				+ "self.register={id:'', name:'', fname: '', pwd:'', email:''};"));
+		
+		vue.addMethod("connexionUser", "let self=this;"+Http.post("/rest/cuser/one",(Object) "self.login", "console.log(response.data);self.user=response.data;"
+				+ "self.dialog=false;self.conn=true;console.log('valeu de conn : '+self.conn);", 
+				"console.log('y a une erreur putain');console.log(response.data);"));
+		
 		vue.addMethod("canceldialog", "this.editedItem={id:'', name:'', fname: '', pwd:'', email:''};this.dialog=false;");
-		vue.addMethod("listecontrat", "document.location.href='/contrat/'+item.id", "item");
+		
+		vue.addMethod("showLogin", "this.tab_connexion=0;this.dialog=true;");		
+		vue.addMethod("showRegister", "this.tab_connexion=1;this.dialog=true;");
 		
 		map.put("vue", vue);
 		return "map/indexmap";
