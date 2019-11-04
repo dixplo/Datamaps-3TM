@@ -5,8 +5,8 @@ import java.util.List;
 public class Cplace {
 
 	private String adresse;
-	private String longi;
-	private String lati;
+	private String lng;
+	private String lat;
 	private Cplace parent;
 	private List<Csite> sites;
 	
@@ -17,17 +17,17 @@ public class Cplace {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	public String getLongi() {
-		return longi;
+	public String getLng() {
+		return lng;
 	}
-	public void setLongi(String longi) {
-		this.longi = longi;
+	public void setLng(String lng) {
+		this.lng = lng;
 	}
-	public String getLati() {
-		return lati;
+	public String getLat() {
+		return lat;
 	}
-	public void setLati(String lati) {
-		this.lati = lati;
+	public void setLat(String lat) {
+		this.lat = lat;
 	}
 	public Cplace getParent() {
 		return parent;
@@ -44,8 +44,8 @@ public class Cplace {
 	public Cplace(String adresse, String longi, String lati, Cplace parent, List<Csite> sites) {
 		super();
 		this.adresse = adresse;
-		this.longi = longi;
-		this.lati = lati;
+		this.lng = longi;
+		this.lat = lati;
 		this.parent = parent;
 		this.sites = sites;
 	}

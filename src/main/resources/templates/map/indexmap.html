@@ -1,6 +1,10 @@
 {{> header}}
-
-  <div id="map"> </div>
+<v-app-bar app color="indigo" dark>
+  <v-toolbar-title>Titre</v-toolbar-title>
+  <v-spacer></v-spacer>
+  {{> conn/login}}
+</v-app-bar>
+  <div id="map"></div>
   <script>
     function initMap() {
       var option = {

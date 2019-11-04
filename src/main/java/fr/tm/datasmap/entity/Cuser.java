@@ -17,20 +17,22 @@ public class Cuser {
 	private String name;
 	private String fname;
 	private String pwd;
-	private Double longi;
-	private Double lati;
+	private String email;
+	private Double lng;
+	private Double lat;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Cevent> events;
 	
 
-	public Cuser(Long id, String name, String fname, String pwd, Double longi, Double lati, List<Cevent> events) {
+	public Cuser(Long id, String name, String fname, String pwd,String email, Double lng, Double lat, List<Cevent> events) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.fname = fname;
 		this.pwd = pwd;
-		this.longi = longi;
-		this.lati = lati;
+		this.email =email;
+		this.lng = lng;
+		this.lat = lat;
 		this.events = events;
 	}
 	
@@ -62,17 +64,23 @@ public class Cuser {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public Double getLongi() {
-		return longi;
+	public String getEmail() {
+		return email;
 	}
-	public void setLongi(Double longi) {
-		this.longi = longi;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public Double getLati() {
-		return lati;
+	public Double getLng() {
+		return lng;
 	}
-	public void setLati(Double lati) {
-		this.lati = lati;
+	public void setLng(Double lng) {
+		this.lng = lng;
+	}
+	public Double getLat() {
+		return lat;
+	}
+	public void setLat(Double lat) {
+		this.lat = lat;
 	}
 	public List<Cevent> getEvents() {
 		return events;
