@@ -51,6 +51,13 @@
                                 </v-row>
                                 <v-row>
                                     <v-col>
+                                        <v-text-field v-model="register.address" label="Address" outlined required
+                                            :rules="AddressRules">
+                                        </v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col>
                                         <v-text-field v-model="register.email" label="E-mail" outlined required
                                             :rules="EmailRules">
                                         </v-text-field>
