@@ -1,36 +1,37 @@
 {{> header}}
 <v-container fluid class="mapsPadding">
-<v-app-bar app color="indigo" dark>
-  <v-toolbar-title>Barre de recherche cheloue de thomas</v-toolbar-title>
-  <v-spacer></v-spacer>
-  <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showLogin">Login</v-btn>
-  <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showRegister">Register</v-btn>
-  {{> conn/login}}
-  <div v-if="conn">{{> conn/contrue}}</div>
-</v-app-bar>
+  <v-app-bar app color="indigo" dark>
+    <v-toolbar-title>Barre de recherche cheloue de thomas</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showLogin">Login</v-btn>
+    <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showRegister">Register</v-btn>
+    {{> conn/login}}
+    <div v-if="conn">{{> conn/contrue}}</div>
+  </v-app-bar>
   <div id="map"></div>
-  <script>
+  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+  <script type="text/javascript">
+    // On initialise la latitude et la longitude de Paris (centre de la carte)
+    var lat = 48.852969;
+    var lon = 2.349903;
+    var macarte = null;
+    // Fonction d'initialisation de la carte
     function initMap() {
-      var option = {
-        zoom:14,
-        center:{lat:49.183333, lng:-0.350000}
-      }
-      // Creation de la carte avec le parametre objet map
-      var map = new google.maps.Map(document.getElementById('map'),option);
-
-      // Creation D'un marqeur
-
-      var marker = new google.maps.Marker({
-        position:{lat:49.2013316,lng:-0.3843974},
-        map:map,
-        icon:''
-      });
-
+      // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+      macarte = L.map('map').setView([lat, lon], 11);
+      // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        // Il est toujours bien de laisser le lien vers la source des données
+        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+        minZoom: 1,
+        maxZoom: 20
+      }).addTo(macarte);
     }
+    window.onload = function () {
+      // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
+      initMap();
+    };
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCylivG9YJHml-7mvUOMqzccY54UrgO1r8&callback=initMap"
-        async defer>
-  </script>
-  </v-container>
+</v-container>
 {{> footer}}
 {{{vue}}}
