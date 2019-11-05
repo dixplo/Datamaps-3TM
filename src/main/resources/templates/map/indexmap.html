@@ -2,9 +2,7 @@
 <v-container fluid class="mapsPadding">
   <v-app-bar app color="indigo" dark>
     <v-toolbar-title>
-
       {{> toolbar/searchbar}}
-
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showLogin">Login</v-btn>
@@ -37,13 +35,12 @@
     function AfficheMenu() {
       menu.hidden = false;
     }
-
   </script>
+
   <script>
     function CacheMenu() {
       menu.hidden = true;
     }
-
   </script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCylivG9YJHml-7mvUOMqzccY54UrgO1r8&callback=initMap"

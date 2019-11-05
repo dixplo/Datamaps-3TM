@@ -1,9 +1,11 @@
 #map{
-  height: 800px;
-  width: 100% ;
+  max-height: 1200px;
+  min-height: 700px;
+  max-width: 100%;
+  overflow: hidden;
+  padding: none;
 }
 
-.mapsPadding
-{
-	padding: 0;
+.container {
+  padding: 0px;
 }
