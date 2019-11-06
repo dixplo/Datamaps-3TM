@@ -33,6 +33,9 @@ public class MapController {
 		vue.addData("lazy", false);
 		vue.addData("tab_connexion", "0");
 
+		vue.addData("lng", 2.349903);
+		vue.addData("lat", 48.852969);
+
 		
 		vue.addData("tabs", typeRepo.findAll());
 		vue.addData("tab", eventRepo.findAll());
@@ -54,13 +57,16 @@ public class MapController {
 		vue.addDataRaw("register", "{id:'', name:'', fname: '', pwd:'', email:'',address:'',lng:null,lat:null}");
 		vue.addMethod("showLogin", "this.tab_connexion=0;this.dialog=true;");		
 		vue.addMethod("showRegister", "this.tab_connexion=1;this.dialog=true;");
-		vue.addMethod("adduser", "let self=this;"
-				+ Http.post("/rest/cuser/",(Object) "self.register", "self.dialog=false;"
+		vue.addMethod("adduser", "let self=this;let $=' ';"
+				+ Http.post("'/rest/cuser/'+self.register.address+$",(Object) "self.register", "self.dialog=false;"
 				+ "self.register={id:'', name:'', fname: '', pwd:'', email:'',address:'',lng:null,lat:null};"
 				+ "this.conn=true;this.user=response.data"));
 		
 		vue.addMethod("connexionUser", "let self=this;"+Http.post("/rest/cuser/one",(Object) "self.login", "console.log(response.data);self.user=response.data;"
-				+ "self.dialog=false;this.login={pwd:'', email:''};this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};self.conn=true;console.log('valeu de conn : '+self.conn);", 
+				+ "self.dialog=false;this.login={pwd:'', email:''};"
+				+ "this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};"
+				+ "self.conn=true;console.log('valeu de conn : '+self.conn);"
+				+ "L.map('map').setView([self.user.lat, self.user.lng], 11);", 
 				"console.log('y a une erreur putain');console.log(response.data);"));
 		vue.addMethod("logoutUser", "this.user={name:'',fname:'',email:''};this.conn=false;");
 		

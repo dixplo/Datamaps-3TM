@@ -48,7 +48,7 @@
 
             <v-tabs dark background-color="darken-3" center-active show-arrows>
                 <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                <v-tab v-for="(mytab, i) in tabs" :key="i" href="#mytab-i">
+                <v-tab v-for="(mytab, i) in tabs" :key="i">
                     <% mytab.title %>
                 </v-tab>
                 <v-tab-item>

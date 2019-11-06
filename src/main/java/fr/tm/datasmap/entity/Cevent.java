@@ -1,8 +1,8 @@
 package fr.tm.datasmap.entity;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,14 +20,16 @@ public class Cevent {
 	private Cuser user;
 	private String title;
 	private String description;
+	@Basic
 	private Date start;
+	@Basic
 	private Date end;
 
 
 	public Cevent() {
 	}
 
-	public Cevent(Long id, Cuser user, String title, String description, Timestamp start, Timestamp end) {
+	public Cevent(Long id, Cuser user, String title, String description, Date start, Date end) {
 		this.id = id;
 		this.user = user;
 		this.title = title;

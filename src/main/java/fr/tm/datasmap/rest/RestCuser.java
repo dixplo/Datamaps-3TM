@@ -3,6 +3,9 @@ package fr.tm.datasmap.rest;
 import java.util.List;
 import java.util.Optional;
 
+import com.byteowls.jopencage.JOpenCageGeocoder;
+import com.byteowls.jopencage.model.JOpenCageForwardRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,9 +45,17 @@ public class RestCuser {
 		}
 		return null;
 	}
-	@PostMapping("")
-	public Cuser addOne(@RequestBody Cuser user) {
+	@PostMapping("{address}")
+	public Cuser addOne(@RequestBody Cuser user, @PathVariable String address) {
+		JOpenCageGeocoder geocoder =new JOpenCageGeocoder("b9798ccd7a31461f8f3396c15ed64160");
+		JOpenCageForwardRequest request =new JOpenCageForwardRequest(address);
+		request.setMinConfidence(1);
+		request.setNoAnnotations(false);
+		request.setNoDedupe(true);
+		user.setLat(geocoder.forward(request).getResults().get(0).getGeometry().getLat());
+		user.setLng(geocoder.forward(request).getResults().get(0).getGeometry().getLng());
 		userRepo.saveAndFlush(user);
+		
 		return user;
 	}
 }
