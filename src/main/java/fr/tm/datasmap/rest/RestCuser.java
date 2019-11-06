@@ -1,5 +1,6 @@
 package fr.tm.datasmap.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,16 +47,25 @@ public class RestCuser {
 		return null;
 	}
 	@PostMapping("{address}")
-	public Cuser addOne(@RequestBody Cuser user, @PathVariable String address) {
+	public List<Object> addOne(@RequestBody Cuser user, @PathVariable String address) {
 		JOpenCageGeocoder geocoder =new JOpenCageGeocoder("b9798ccd7a31461f8f3396c15ed64160");
 		JOpenCageForwardRequest request =new JOpenCageForwardRequest(address);
 		request.setMinConfidence(1);
 		request.setNoAnnotations(false);
 		request.setNoDedupe(true);
+		ArrayList<Object> res = new ArrayList<Object>();
+		if (!geocoder.forward(request).getResults().isEmpty()) {
 		user.setLat(geocoder.forward(request).getResults().get(0).getGeometry().getLat());
 		user.setLng(geocoder.forward(request).getResults().get(0).getGeometry().getLng());
 		userRepo.saveAndFlush(user);
-		
-		return user;
+		res.add(user);
+		res.add(1);
+		} else {
+			user.setLat(48.852969);
+			user.setLng(2.349903);
+			res.add(user);
+			res.add(0);
+		}
+		return res;
 	}
 }

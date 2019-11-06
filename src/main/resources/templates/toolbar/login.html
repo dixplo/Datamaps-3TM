@@ -16,8 +16,10 @@
                                 </v-row>
                                 <v-row>
                                     <v-col>
-                                        <v-text-field v-model="login.pwd" label="Password" outlined required
-                                            :rules="PasswordRules">
+                                        <v-text-field :append-icon="showPwdLogin ? 'visibility' : 'visibility_off'"
+                                            :type="showPwdLogin ? 'text' : 'password'"
+                                            @click:append="showPwdLogin = !showPwdLogin" v-model="login.pwd"
+                                            label="Password" outlined required :rules="PasswordRules">
                                         </v-text-field>
                                     </v-col>
                                 </v-row>
@@ -65,8 +67,10 @@
                                 </v-row>
                                 <v-row>
                                     <v-col>
-                                        <v-text-field v-model="register.pwd" label="Password" outlined required
-                                            :rules="PasswordRules">
+                                        <v-text-field :append-icon="showPwdRegister ? 'visibility' : 'visibility_off'"
+                                            :type="showPwdRegister ? 'text' : 'password'"
+                                            @click:append="showPwdRegister = !showPwdRegister" v-model="register.pwd"
+                                            label="Password" outlined required :rules="PasswordRules">
                                         </v-text-field>
                                     </v-col>
                                 </v-row>

@@ -27,6 +27,9 @@ public class MapController {
 	@GetMapping("")
 	public String map(ModelMap map) {
 		vue.addData("dialog", false);
+		vue.addData("showPwdLogin", false);
+		vue.addData("showPwdRegister", false);
+
 		vue.addData("save", true);
 		vue.addData("valid", true);
 		vue.addData("validC", true);
@@ -58,14 +61,14 @@ public class MapController {
 		vue.addMethod("showLogin", "this.tab_connexion=0;this.dialog=true;");		
 		vue.addMethod("showRegister", "this.tab_connexion=1;this.dialog=true;");
 		vue.addMethod("adduser", "let self=this;let $=' ';"
-				+ Http.post("'/rest/cuser/'+self.register.address+$",(Object) "self.register", "self.dialog=false;"
+				+ Http.post("'/rest/cuser/'+self.register.address+$",(Object) "self.register", "if(response.data[1]==1){self.dialog=false;"
 				+ "self.register={id:'', name:'', fname: '', pwd:'', email:'',address:'',lng:null,lat:null};"
-				+ "this.conn=true;this.user=response.data"));
+				+ "this.conn=true;this.user=response.data[0];"
+				+ "self.connexionUser();} else {alert('Address is incorrect!')}"));
 		
-		vue.addMethod("connexionUser", "let self=this;"+Http.post("/rest/cuser/one",(Object) "self.login", "console.log(response.data);self.user=response.data;"
+		vue.addMethod("connexionUser", "let self=this;"+Http.post("/rest/cuser/one",(Object) "self.login", "console.log(response.data);if(response.data!=''){console.log(response.data);self.user=response.data;"
 				+ "self.dialog=false;this.login={pwd:'', email:''};"
-				+ "this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};"
-				+ "self.conn=true;console.log('valeu de conn : '+self.conn);"
+				+ "this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};self.conn=true;"
 				+ "var container = L.DomUtil.get('map'); if(container != null){ container._leaflet_id = null; }"
 				+ "document.getElementById('map').innerHTML = '<div id=\"map\"></div>';"
 				+ "var osmUrl = 'http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';"
@@ -73,7 +76,7 @@ public class MapController {
 				+ "var osmLayer = new L.TileLayer(osmUrl, {maxZoom: 18, attribution: osmAttribution});"
 				+ "var map = new L.Map('map');"
 				+ "map.setView(new L.LatLng(self.user.lat,self.user.lng), 11 );"
-				+ "map.addLayer(osmLayer);", 
+				+ "map.addLayer(osmLayer);}else{alert('Email or password is incorrect!')}", 
 				"console.log('y a une erreur putain');console.log(response.data);"));
 		vue.addMethod("logoutUser", "this.user={name:'',fname:'',email:''};this.conn=false;");
 		
