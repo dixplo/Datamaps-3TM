@@ -1,10 +1,16 @@
 #map{
   max-height: 1200px;
-  min-height: 700px;
+  min-height: 100vh;
   max-width: 100%;
   overflow: hidden;
   padding: none;
   z-index: 0;
+  left: 80px;
+  top: 0px;
+}
+
+#navi{
+  z-index: 1;
 }
 
 .container {

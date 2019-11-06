@@ -1,25 +1,25 @@
-<v-text-field hide-details prepend-icon="search" single-line onfocus="AfficheMenu()" onblur="CacheMenu()">
-</v-text-field>
-<div id="menu" hidden=true>
-    <template>
-        <v-card>
-            <v-tabs dark background-color="teal darken-3" show-arrows>
-                <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                <v-tab v-for="i in 5" :key="i">
-                    Item <% i %>
-                </v-tab>
-            </v-tabs>
-        </v-card>
-    </template>
-</div>
+<template>
+  <div class="text-center">
+    <v-text-field hide-details prepend-icon="search" single-line onfocus="AfficheMenu()" onblur="CacheMenu()">
+    </v-text-field>
+    <v-menu offset-y persistent id="menu" hidden=true>
+      <v-tabs dark background-color="teal darken-3" center-active show-arrows>
+        <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
+        <v-tab v-for="i in 15" :key="i">
+          Item <% i %>
+        </v-tab>
+      </v-tabs>
+    </v-menu>
+  </div>
+</template>
 <script>
-    function AfficheMenu() {
-      menu.hidden = false;
-    }
-  </script>
+  function AfficheMenu() {
+    menu.hidden = false;
+  }
+</script>
 
-  <script>
-    function CacheMenu() {
-      menu.hidden = true;
-    }
-  </script>
+<script>
+  function CacheMenu() {
+    menu.hidden = true;
+  }
+</script>
