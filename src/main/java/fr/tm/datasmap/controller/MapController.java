@@ -66,7 +66,14 @@ public class MapController {
 				+ "self.dialog=false;this.login={pwd:'', email:''};"
 				+ "this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};"
 				+ "self.conn=true;console.log('valeu de conn : '+self.conn);"
-				+ "L.map('map').setView([self.user.lat, self.user.lng], 11);", 
+				+ "var container = L.DomUtil.get('map'); if(container != null){ container._leaflet_id = null; }"
+				+ "document.getElementById('map').innerHTML = '<div id=\"map\"></div>';"
+				+ "var osmUrl = 'http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';"
+				+ "var osmAttribution = '©3T';"
+				+ "var osmLayer = new L.TileLayer(osmUrl, {maxZoom: 18, attribution: osmAttribution});"
+				+ "var map = new L.Map('map');"
+				+ "map.setView(new L.LatLng(self.user.lat,self.user.lng), 11 );"
+				+ "map.addLayer(osmLayer);", 
 				"console.log('y a une erreur putain');console.log(response.data);"));
 		vue.addMethod("logoutUser", "this.user={name:'',fname:'',email:''};this.conn=false;");
 		
