@@ -15,9 +15,7 @@
         minZoom: 1,
         maxZoom: 20
       }).addTo(map);
+      map.flyTo(new L.LatLng(40.737, -73.923), 15);
+      console.log(map);
     }
-    window.onload = function () {
-      // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
-      initMap();
-    };
   </script>
