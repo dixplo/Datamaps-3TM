@@ -68,15 +68,7 @@ public class MapController {
 		vue.addMethod("connexionUser", "let self=this;"+Http.post("/rest/cuser/one",(Object) "self.login", "console.log(response.data);if(response.data!=''){console.log(response.data);self.user=response.data;"
 				+ "self.dialog=false;this.login={pwd:'', email:''};"
 				+ "this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};self.conn=true;"
-				//+ "var container = L.DomUtil.get('map'); console.log(container._leaflet_id);if(container != null){ container._leaflet_id = null; }"
-				//+ "document.getElementById('map').innerHTML = '<div id=\"map\"></div>';"
-				+ "var map = L.map('map').setView([self.user.lat, self.user.lng], 11);"
-				+ "L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {"
-				+ "attribution: '©3T',"
-				+ "minZoom: 1,"
-				+ "maxZoom: 20}).addTo(map);"
-				//+ "map.panTo(new L.LatLng(40.737, -73.923));"
-				+ ""
+				+ "self.map.setView([self.user.lat, self.user.lng], 16);"
 				//+ "var myIcon = L.icon({ iconUrl: '/img/geopoint_home.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
 				//+ "var marker = L.marker([self.user.lat, self.user.lng], { icon: myIcon }).addTo(map);"
 				+ "}else{alert('Email or password is incorrect!')}", 
@@ -85,12 +77,11 @@ public class MapController {
 		
 		vue.addMethod("canceldialog", "this.login={pwd:'', email:''};this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};this.dialog=false;");
 		
-		vue.addMethod("initmap", "console.log(this.map);");
-		/*+ "this.map.setView([48.852969, 2.349903], 11);"
+		vue.addMethod("initmap", "this.map= L.map('map').setView([48.852969, 2.349903], 11);"
 		+ "L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {"
 		+ "attribution: '©3T',"
 		+ "minZoom: 1,maxZoom: 20"
-		+ "}).addTo(this.map);");*/
+		+ "}).addTo(this.map);");
 
 		vue.onMounted("this.initmap();");
 
