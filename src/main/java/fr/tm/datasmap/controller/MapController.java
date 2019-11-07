@@ -68,9 +68,9 @@ public class MapController {
 		vue.addMethod("connexionUser", "let self=this;"+Http.post("/rest/cuser/one",(Object) "self.login", "console.log(response.data);if(response.data!=''){console.log(response.data);self.user=response.data;"
 				+ "self.dialog=false;this.login={pwd:'', email:''};"
 				+ "this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};self.conn=true;"
-				+ "self.map.setView([self.user.lat, self.user.lng], 16);"
-				//+ "var myIcon = L.icon({ iconUrl: '/img/geopoint_home.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
-				//+ "var marker = L.marker([self.user.lat, self.user.lng], { icon: myIcon }).addTo(map);"
+				+ "self.map.flyTo([self.user.lat, self.user.lng], 16);"
+				+ "var myIcon = L.icon({ iconUrl: '/img/geopoint_home.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
+				+ "var marker = L.marker([self.user.lat, self.user.lng], { icon: myIcon }).addTo(self.map);"
 				+ "}else{alert('Email or password is incorrect!')}", 
 				"console.log('y a une erreur putain');console.log(response.data);"));
 		vue.addMethod("logoutUser", "this.user={name:'',fname:'',email:''};this.conn=false;");

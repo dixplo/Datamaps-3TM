@@ -26,12 +26,13 @@ public class RestCuser {
 	private ICuserRepo userRepo;
 
 	@GetMapping("")
-	public List<Cuser> getAll(){
+	public List<Cuser> getAll() {
 		return userRepo.findAll();
 	}
+
 	@GetMapping("{id}")
-	public Cuser getOne(@PathVariable String id){
-		Optional<Cuser> user =userRepo.findById(Long.parseLong(id));
+	public Cuser getOne(@PathVariable String id) {
+		Optional<Cuser> user = userRepo.findById(Long.parseLong(id));
 		if (user.isPresent()) {
 			return user.get();
 		}
@@ -40,32 +41,47 @@ public class RestCuser {
 
 	@PostMapping("one")
 	public Cuser getOne(@RequestBody Cuser user) {
-		Optional<Cuser> use =userRepo.findOneByEmailAndPwd(user.getEmail(), user.getPwd());
+		Optional<Cuser> use = userRepo.findOneByEmailAndPwd(user.getEmail(), user.getPwd());
 		if (use.isPresent()) {
 			return use.get();
 		}
 		return null;
 	}
+
 	@PostMapping("{address}")
 	public List<Object> addOne(@RequestBody Cuser user, @PathVariable String address) {
-		JOpenCageGeocoder geocoder =new JOpenCageGeocoder("b9798ccd7a31461f8f3396c15ed64160");
-		JOpenCageForwardRequest request =new JOpenCageForwardRequest(address);
-		request.setMinConfidence(1);
-		request.setNoAnnotations(false);
-		request.setNoDedupe(true);
 		ArrayList<Object> res = new ArrayList<Object>();
-		if (!geocoder.forward(request).getResults().isEmpty()) {
-		user.setLat(geocoder.forward(request).getResults().get(0).getGeometry().getLat());
-		user.setLng(geocoder.forward(request).getResults().get(0).getGeometry().getLng());
-		userRepo.saveAndFlush(user);
-		res.add(user);
-		res.add(1);
+		Boolean deja = false;
+		for (Cuser use : userRepo.findAll()) {
+			if(user.getEmail() == use.getEmail()){
+				deja = true;
+			}
+		}
+		if (!deja) {
+			JOpenCageGeocoder geocoder = new JOpenCageGeocoder("b9798ccd7a31461f8f3396c15ed64160");
+			JOpenCageForwardRequest request = new JOpenCageForwardRequest(address);
+			request.setMinConfidence(1);
+			request.setNoAnnotations(false);
+			request.setNoDedupe(true);
+			if (!geocoder.forward(request).getResults().isEmpty()) {
+				user.setLat(geocoder.forward(request).getResults().get(0).getGeometry().getLat());
+				user.setLng(geocoder.forward(request).getResults().get(0).getGeometry().getLng());
+				userRepo.saveAndFlush(user);
+				res.add(user);
+				res.add(1);
+			} else {
+				user.setLat(48.852969);
+				user.setLng(2.349903);
+				res.add(user);
+				res.add(0);
+			}
 		} else {
 			user.setLat(48.852969);
 			user.setLng(2.349903);
 			res.add(user);
 			res.add(0);
 		}
+
 		return res;
 	}
 }
