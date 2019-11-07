@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,26 +17,33 @@ public class Cevent {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@ManyToOne
-	private Cuser user;
 	private String title;
 	private String description;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date start;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date end;
-
+	@OneToMany
+	private Ctype type;
 
 	public Cevent() {
 	}
 
-	public Cevent(Long id, Cuser user, String title, String description, Date start, Date end) {
+	public Cevent(Long id, String title, String description, Date start, Date end, Ctype type) {
 		this.id = id;
-		this.user = user;
 		this.title = title;
 		this.description = description;
 		this.start = start;
 		this.end = end;
+		this.type =type;
+	}
+
+	public Cevent(String title, String description, Date start, Date end, Ctype type) {
+		this.title = title;
+		this.description = description;
+		this.start = start;
+		this.end = end;
+		this.type =type;
 	}
 
 	public Long getId() {
@@ -45,14 +52,6 @@ public class Cevent {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Cuser getUser() {
-		return this.user;
-	}
-
-	public void setUser(Cuser user) {
-		this.user = user;
 	}
 
 	public String getTitle() {
@@ -85,5 +84,12 @@ public class Cevent {
 
 	public void setEnd(Date end) {
 		this.end = end;
+	}
+	public Ctype getType() {
+		return this.type;
+	}
+
+	public void setType(Ctype type) {
+		this.type = type;
 	}
 }
