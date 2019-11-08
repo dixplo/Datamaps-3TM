@@ -29,8 +29,9 @@
     </template>
 
     <v-divider></v-divider>
+    {{> event/formevent}}
     <v-list>
-        <v-list-item link>
+        <v-list-item link @click="dialogEvent=true;">
             <v-list-item-icon>
                 <v-icon>mdi-flag-plus</v-icon>
             </v-list-item-icon>

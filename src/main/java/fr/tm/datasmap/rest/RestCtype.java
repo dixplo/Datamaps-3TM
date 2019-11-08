@@ -19,40 +19,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.tm.datasmap.entity.Cevent;
+import fr.tm.datasmap.entity.Ctype;
 import fr.tm.datasmap.repository.ICeventRepo;
+import fr.tm.datasmap.repository.ICtypeRepo;
 
 
 @RestController
-@RequestMapping("/rest/cevent/")
-public class RestCevent {
+@RequestMapping("/rest/ctype/")
+public class RestCtype {
 
 	@Autowired
-	private ICeventRepo eventRepo;
+	private ICtypeRepo typeRepo;
 
 	@GetMapping("")
-	public List<Cevent> getAll() {
-		return eventRepo.findAll();
+	public List<Ctype> getAll() {
+		return typeRepo.findAll();
 	}
 
-	@GetMapping("{id}")
-	public Cevent getOne(@PathVariable String id) {
-		Optional<Cevent> user = eventRepo.findById(Long.parseLong(id));
-		if (user.isPresent()) {
-			return user.get();
-		}
-		return null;
+	@GetMapping("{title}")
+	public Ctype getOne(@PathVariable String title) {
+		return typeRepo.findOneByTitle(title);
     }
-    
-    @GetMapping("one")
-    public Cevent setOne(){
-        Cevent event = new Cevent("title exemple", "description exemple",new Timestamp(Calendar.getInstance().getTimeInMillis()),new Timestamp(Calendar.getInstance().getTimeInMillis()),(Double) 49.1828008,(Double) 0.3690815, "Caen");
-        eventRepo.saveAndFlush(event);
-        return event;
-    }
-
-	@PostMapping("one")
-	public Cevent getOne(@RequestBody Cevent user) {
-		
-		return null;
-	}
 }

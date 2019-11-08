@@ -38,17 +38,27 @@ public class MapController {
 
 
 		
-		vue.addData("tabs", typeRepo.findAll());
+		vue.addData("types", typeRepo.findAll());
 		vue.addData("allEvent", eventRepo.findAll());
-		vue.addData("dialogEVent", false);
-		vue.addDataRaw("event", "");
-		
-		
+		vue.addData("dialogEvent", false);
+		vue.addData("validEvent", true);
+		vue.addData("lazyEvent", false);
+		vue.addData("tab_addVSlngLat", 0);
+		vue.addData("searchType", "");
+		vue.addDataRaw("event", "{title:'',description:'',start:null,end:null,type:'',lng:null,lat:null,address:''}");
+		//regle du formulaire event
+		vue.addDataRaw("TitleRules", "[v => !!v || 'Title is empty']");
+		vue.addDataRaw("DescriptionRules", "[v => !!v || 'Description is empty']");
+		vue.addDataRaw("AddressEventRules", "[v => !!v || 'Address is empty']");
+		vue.addDataRaw("TypeRules", "[v => !!v || 'Type is empty']");
+		vue.addDataRaw("LngRules", "[v => !!v || 'Longitude is empty']");
+		vue.addDataRaw("LatRules", "[v => !!v || 'Latitude is empty']");
+		//fin regle
+
+
 		vue.addData("conn", false);
 		vue.addDataRaw("user", "{name:'',fname:'',email:''}");
-
-
-		//regle du formulaire
+		//regle du formulaire user
 		vue.addDataRaw("NameRules", "[v => !!v || 'Name is empty']");
 		vue.addDataRaw("FnameRules", "[v => !!v || 'Firstname is empty']");
 		vue.addDataRaw("AddressRules", "[v => !!v || 'Address is empty']");
@@ -71,7 +81,7 @@ public class MapController {
 				+ "this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};self.conn=true;"
 				+ "self.map.flyTo([self.user.lat, self.user.lng], 16);"
 				+ "var myIcon = L.icon({ iconUrl: '/img/geopoint_home.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
-				+ "var marker = L.marker([self.user.lat, self.user.lng], { icon: myIcon }).addTo(self.map);"
+				+ "var marker = L.marker([self.user.lat, self.user.lng], { icon: myIcon }).addTo(self.map);console.log(self.allEvent);"
 				+ "}else{alert('Email or password is incorrect!')}", 
 				"console.log('y a une erreur putain');console.log(response.data);"));
 		vue.addMethod("logoutUser", "this.user={name:'',fname:'',email:''};this.conn=false;");

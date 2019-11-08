@@ -8,8 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.byteowls.jopencage.JOpenCageGeocoder;
+import com.byteowls.jopencage.model.JOpenCageResponse;
+import com.byteowls.jopencage.model.JOpenCageReverseRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
 public class Cevent {
@@ -26,8 +28,23 @@ public class Cevent {
 	private Ctype type;
 	private Double lng;
 	private Double lat;
+	private String address;
 
-	public Cevent(Long id, String title, String description, Timestamp start, Timestamp end, Ctype type, Double lng, Double lat) {
+	public Cevent(Long id, String title, String description, Timestamp start, Timestamp end, Ctype type, Double lng,
+			Double lat, String address) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.start = start;
+		this.end = end;
+		this.type = type;
+		this.lng = lng;
+		this.lat = lat;
+		this.address = address;
+	}
+
+	public Cevent(Long id, String title, String description, Timestamp start, Timestamp end, Ctype type, Double lng,
+			Double lat) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -38,6 +55,25 @@ public class Cevent {
 		this.lat = lat;
 	}
 
+	public Cevent(String title, String description, Timestamp start, Timestamp end, Double lng, Double lat) {
+		this.title = title;
+		this.description = description;
+		this.start = start;
+		this.end = end;
+		this.lng = lng;
+		this.lat = lat;
+	}
+
+	public Cevent(String title, String description, Timestamp start, Timestamp end, Double lng, Double lat,
+			String address) {
+		this.title = title;
+		this.description = description;
+		this.start = start;
+		this.end = end;
+		this.lng = lng;
+		this.lat = lat;
+		this.address = address;
+	}
 
 	public Cevent(Long id, String title, String description, Timestamp start, Timestamp end, Ctype type) {
 		this.id = id;
@@ -97,7 +133,7 @@ public class Cevent {
 	public void setEnd(Timestamp end) {
 		this.end = end;
 	}
-	
+
 	public Ctype getType() {
 		return this.type;
 	}
@@ -120,5 +156,13 @@ public class Cevent {
 
 	public void setLat(Double lat) {
 		this.lat = lat;
+	}
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }
