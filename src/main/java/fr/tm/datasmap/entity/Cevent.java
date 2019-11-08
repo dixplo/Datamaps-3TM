@@ -1,13 +1,14 @@
 package fr.tm.datasmap.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -16,26 +17,45 @@ public class Cevent {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@ManyToOne
-	private Cuser user;
 	private String title;
 	private String description;
-	@Basic
-	private Date start;
-	@Basic
-	private Date end;
+	private Timestamp start;
+	private Timestamp end;
+	@JsonIgnore
+	@ManyToOne
+	private Ctype type;
+	private Double lng;
+	private Double lat;
 
-
-	public Cevent() {
-	}
-
-	public Cevent(Long id, Cuser user, String title, String description, Date start, Date end) {
+	public Cevent(Long id, String title, String description, Timestamp start, Timestamp end, Ctype type, Double lng, Double lat) {
 		this.id = id;
-		this.user = user;
 		this.title = title;
 		this.description = description;
 		this.start = start;
 		this.end = end;
+		this.type = type;
+		this.lng = lng;
+		this.lat = lat;
+	}
+
+
+	public Cevent(Long id, String title, String description, Timestamp start, Timestamp end, Ctype type) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.start = start;
+		this.end = end;
+		this.type = type;
+	}
+
+	public Cevent(String title, String description, Timestamp start, Timestamp end) {
+		this.title = title;
+		this.description = description;
+		this.start = start;
+		this.end = end;
+	}
+
+	public Cevent() {
 	}
 
 	public Long getId() {
@@ -44,14 +64,6 @@ public class Cevent {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Cuser getUser() {
-		return this.user;
-	}
-
-	public void setUser(Cuser user) {
-		this.user = user;
 	}
 
 	public String getTitle() {
@@ -70,19 +82,43 @@ public class Cevent {
 		this.description = description;
 	}
 
-	public Date getStart() {
+	public Timestamp getStart() {
 		return this.start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(Timestamp start) {
 		this.start = start;
 	}
 
-	public Date getEnd() {
+	public Timestamp getEnd() {
 		return this.end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(Timestamp end) {
 		this.end = end;
+	}
+	
+	public Ctype getType() {
+		return this.type;
+	}
+
+	public void setType(Ctype type) {
+		this.type = type;
+	}
+
+	public Double getLng() {
+		return this.lng;
+	}
+
+	public void setLng(Double lng) {
+		this.lng = lng;
+	}
+
+	public Double getLat() {
+		return this.lat;
+	}
+
+	public void setLat(Double lat) {
+		this.lat = lat;
 	}
 }

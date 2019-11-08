@@ -45,21 +45,7 @@
                     <v-list-item-title>Event List</v-list-item-title>
                 </v-list-item>
             </template>
-
-            <v-tabs dark background-color="darken-3" center-active show-arrows>
-                <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                <v-tab v-for="(mytab, i) in tabs" :key="i">
-                    <% mytab.title %>
-                </v-tab>
-                <v-tab-item>
-                    <v-list  v-for="elem in tab">
-                        <v-list-item-content two-line>
-                            <v-list-item-title class="title"><%elem.title%></v-list-item-title>
-                            <v-list-item-subtitle><%elem.description%></v-list-item-subtitle>
-                        </v-list-item-content>
-                    </v-list>
-                </v-tab-item>
-            </v-tabs>
+            {{> event/displayevent}}
         </v-list-group>
     </v-list>
     <template v-slot:append v-if="conn">

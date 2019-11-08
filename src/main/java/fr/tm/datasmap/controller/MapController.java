@@ -36,11 +36,12 @@ public class MapController {
 		vue.addData("lazy", false);
 		vue.addData("tab_connexion", "0");
 
-		vue.addDataRaw("map", "L.map('map',{center: [51.505, -0.09],zoom: 13})");
 
 		
 		vue.addData("tabs", typeRepo.findAll());
-		vue.addData("tab", eventRepo.findAll());
+		vue.addData("allEvent", eventRepo.findAll());
+		vue.addData("dialogEVent", false);
+		vue.addDataRaw("event", "");
 		
 		
 		vue.addData("conn", false);

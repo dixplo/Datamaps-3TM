@@ -1,0 +1,26 @@
+<v-tabs dark background-color="darken-3" center-active show-arrows>
+    <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
+    <v-tab :key="0">
+        All
+    </v-tab>
+    <v-tab v-for="(mytab, i) in tabs" :key="i+1">
+        <% mytab.title %>
+    </v-tab>
+    <v-tab-item>
+        <v-list v-for="elem in allEvent" :shaped="true">
+            <v-list-item-content tree-line>
+                <v-list-item-title class="title" v-text="elem.title"></v-list-item-title>
+                <v-list-item-subtitle v-text="elem.description"></v-list-item-subtitle>
+                <v-list-item-subtitle align-end>address</v-list-item-subtitle>
+            </v-list-item-content>
+        </v-list>
+    </v-tab-item>
+    <v-tab-item v-for="mytab in tabs">
+        <v-list v-for="elem in mytab.events" :shaped="true">
+            <v-list-item-content two-line>
+                <v-list-item-title class="title" v-text="elem.title"></v-list-item-title>
+                <v-list-item-subtitle v-text="elem.description"></v-list-item-subtitle>
+            </v-list-item-content>
+        </v-list>
+    </v-tab-item>
+</v-tabs>

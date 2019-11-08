@@ -1,0 +1,90 @@
+<v-dialog v-model="dialogEvent" max-width="800px">
+
+        <v-container>
+            <v-tabs v-model="tab_connexion" :grow="true">
+                <v-tab>Login</v-tab>
+                <v-tab-item :key="0" :value="0">
+                    <v-card flat tile>
+                        <v-card-text>
+                            <v-container>
+                                <v-form ref="form" v-model="validC" :lazy-validation="lazy">
+                                    <v-row>
+                                        <v-col>
+                                            <v-text-field v-model="login.email" label="E-mail" outlined required
+                                                :rules="EmailRules">
+                                            </v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row>
+                                        <v-col>
+                                            <v-text-field :append-icon="showPwdLogin ? 'visibility' : 'visibility_off'"
+                                                :type="showPwdLogin ? 'text' : 'password'"
+                                                @click:append="showPwdLogin = !showPwdLogin" v-model="login.pwd"
+                                                label="Password" outlined required :rules="PasswordRules">
+                                            </v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-form>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="canceldialog">Cancel</v-btn>
+                            <v-btn text @click="connexionUser" :disabled="!validC" color="success">Login</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-tab-item>
+                <v-tab>Register</v-tab>
+                <v-tab-item :key="1" :value="1">
+                    <v-card flat tile>
+                        <v-card-text>
+                            <v-container>
+                                <v-form ref="form" v-model="valid" :lazy-validation="lazy">
+                                    <v-row>
+                                        <v-col cols="12" md="6">
+                                            <v-text-field v-model="register.name" label="Name" outlined required
+                                                :rules="NameRules">
+                                            </v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" md="6">
+                                            <v-text-field v-model="register.fname" label="Firstname" outlined required
+                                                :rules="FnameRules">
+                                            </v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row>
+                                        <v-col>
+                                            <v-text-field v-model="register.address" label="Address" outlined required
+                                                :rules="AddressRules">
+                                            </v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row>
+                                        <v-col>
+                                            <v-text-field v-model="register.email" label="E-mail" outlined required
+                                                :rules="EmailRules">
+                                            </v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row>
+                                        <v-col>
+                                            <v-text-field :append-icon="showPwdRegister ? 'visibility' : 'visibility_off'"
+                                                :type="showPwdRegister ? 'text' : 'password'"
+                                                @click:append="showPwdRegister = !showPwdRegister" v-model="register.pwd"
+                                                label="Password" outlined required :rules="PasswordRules">
+                                            </v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-form>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="canceldialog">Cancel</v-btn>
+                            <v-btn text @click="adduser" :disabled="!valid" color="success">Register</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-tab-item>
+            </v-tabs>
+        </v-container>
+    </v-dialog>
