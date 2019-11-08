@@ -26,6 +26,14 @@ public class MapController {
 
 	@GetMapping("")
 	public String map(ModelMap map) {
+
+		// Definition du Profil
+		
+		vue.addData("dialogProfil", false);
+		
+		// Fin Profil
+
+
 		vue.addData("dialog", false);
 		vue.addData("showPwdLogin", false);
 		vue.addData("showPwdRegister", false);
