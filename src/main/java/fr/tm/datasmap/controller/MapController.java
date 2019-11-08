@@ -33,6 +33,9 @@ public class MapController {
 		
 		// Fin Profil
 
+		vue.addData("dialogStandBy",false);
+		vue.addData("loadingRegLog", false);
+
 
 		vue.addData("dialog", false);
 		vue.addData("showPwdLogin", false);
@@ -62,7 +65,8 @@ public class MapController {
 		vue.addDataRaw("LatRules", "[v => !!v || 'Latitude is empty']");
 		//fin regle
 
-		vue.addMethod("","");
+		vue.addMethod("showDialogEvent","");
+		vue.addMethod("goEvent","this.map.flyTo([elem.lat, elem.lng], 15);", "elem");
 
 
 		vue.addData("conn", false);
@@ -79,20 +83,20 @@ public class MapController {
 		vue.addDataRaw("register", "{id:'', name:'', fname: '', pwd:'', email:'',address:'',lng:null,lat:null}");
 		vue.addMethod("showLogin", "this.tab_connexion=0;this.dialog=true;");		
 		vue.addMethod("showRegister", "this.tab_connexion=1;this.dialog=true;");
-		vue.addMethod("adduser", "let self=this;let $=' ';"
+		vue.addMethod("adduser", "let self=this;let $=' ';self.dialogStandBy=true;self.loadingRegLog=true;"
 				+ Http.post("'/rest/cuser/'+self.register.address+$",(Object) "self.register", "if(response.data[1]==1){self.dialog=false;"
 				+ "self.register={id:'', name:'', fname: '', pwd:'', email:'',address:'',lng:null,lat:null};"
-				+ "this.conn=true;this.user=response.data[0];"
-				+ "self.connexionUser();} else {alert('Address is incorrect!')}"));
+				+ "self.login=response.data[0];self.loadingRegLog=false;"
+				+ "self.connexionUser();} else {alert('Address is incorrect!');self.loadingRegLog=false;}"));
 		
-		vue.addMethod("connexionUser", "let self=this;"+Http.post("/rest/cuser/one",(Object) "self.login", "console.log(response.data);if(response.data!=''){console.log(response.data);self.user=response.data;"
+		vue.addMethod("connexionUser", "let self=this;self.dialogStandBy=true;"+Http.post("/rest/cuser/one",(Object) "self.login", "console.log(response.data);if(response.data!=''){console.log(response.data);self.user=response.data;"
 				+ "self.dialog=false;this.login={pwd:'', email:''};"
 				+ "this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};self.conn=true;"
-				+ "self.map.flyTo([self.user.lat, self.user.lng], 16);"
+				+ "self.map.flyTo([self.user.lat, self.user.lng], 15);"
 				+ "var myIcon = L.icon({ iconUrl: '/img/geopoint_home.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
-				+ "var marker = L.marker([self.user.lat, self.user.lng], { icon: myIcon }).addTo(self.map);console.log(self.allEvent);"
-				+ "}else{alert('Email or password is incorrect!')}", 
-				"console.log('y a une erreur putain');console.log(response.data);"));
+				+ "var marker = L.marker([self.user.lat, self.user.lng], { icon: myIcon }).addTo(self.map);self.dialogStandBy=false;"
+				+ "}else{alert('Email or password is incorrect!');self.dialogStandBy=false;}", 
+				"console.log('y a une erreur putain');console.log(response.data);self.dialogStandBy=false;alert('An error as ocurred!');"));
 		vue.addMethod("logoutUser", "this.user={name:'',fname:'',email:''};this.conn=false;");
 		
 		vue.addMethod("canceldialog", "this.login={pwd:'', email:''};this.register={id:'', name:'', fname: '', pwd:'', email:'',address:''};this.dialog=false;");
