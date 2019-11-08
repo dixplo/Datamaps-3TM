@@ -45,9 +45,8 @@ public class MapController {
 		vue.addData("tab_connexion", "0");
 
 
-		
-		vue.addData("types", typeRepo.findAll());
 		vue.addData("allEvent", eventRepo.findAll());
+		vue.addData("types", typeRepo.findAll());
 		vue.addData("dialogEvent", false);
 		vue.addData("validEvent", true);
 		vue.addData("lazyEvent", false);
@@ -62,6 +61,8 @@ public class MapController {
 		vue.addDataRaw("LngRules", "[v => !!v || 'Longitude is empty']");
 		vue.addDataRaw("LatRules", "[v => !!v || 'Latitude is empty']");
 		//fin regle
+
+		vue.addMethod("","");
 
 
 		vue.addData("conn", false);
@@ -100,7 +101,9 @@ public class MapController {
 		+ "L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {"
 		+ "attribution: '©3T',"
 		+ "minZoom: 1,maxZoom: 20"
-		+ "}).addTo(this.map);");
+		+ "}).addTo(this.map);let self=this;"
+		+ Http.get("/rest/cevent/", "var eventIcon = L.icon({ iconUrl: '/img/geopoint_events.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
+		+ "for (var i=0;i<response.data.length;i++) {var marker = L.marker([response.data[i].lat, response.data[i].lng], { icon: eventIcon }).addTo(self.map);}","console.log(response.data);"));
 
 		vue.onMounted("this.initmap();");
 

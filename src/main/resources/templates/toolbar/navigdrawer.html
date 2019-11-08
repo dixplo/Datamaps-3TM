@@ -2,8 +2,13 @@
     <template v-slot:prepend>
         <v-list>
             <v-list-item>
+<<<<<<< HEAD
                 <v-list-item-avatar size="62" >
                   <v-img @click="dialogProfil=true;" src="https://randomuser.me/api/portraits/lego/1.jpg"></v-img>
+=======
+                <v-list-item-avatar size="62" ><v-icon v-if="!conn">mdi-account-circle-outline</v-icon>
+                  <v-img v-if="conn" @click="dialogProfil=true;" src="https://randomuser.me/api/portraits/lego/1.jpg"></v-img>
+>>>>>>> a7ba78206af94a746927e7d6e1914b70eff3fd9a
                   {{> toolbar/profil}}
                 </v-list-item-avatar>
                 <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showLogin">Login</v-btn>

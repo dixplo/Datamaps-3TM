@@ -1,14 +1,9 @@
 package fr.tm.datasmap.rest;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import com.byteowls.jopencage.JOpenCageGeocoder;
-import com.byteowls.jopencage.model.JOpenCageForwardRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +40,11 @@ public class RestCevent {
     
     @GetMapping("one")
     public Cevent setOne(){
-        Cevent event = new Cevent("title exemple", "description exemple",new Timestamp(Calendar.getInstance().getTimeInMillis()),new Timestamp(Calendar.getInstance().getTimeInMillis()),(Double) 49.1828008,(Double) 0.3690815, "Caen");
+        double lng =-0.3690815;
+		Cevent event = new Cevent("title exemple", "description exemple",
+				new Timestamp(Calendar.getInstance().getTimeInMillis()),
+				new Timestamp(Calendar.getInstance().getTimeInMillis()), (Double) 49.1828008, lng,
+				"Caen");
         eventRepo.saveAndFlush(event);
         return event;
     }
