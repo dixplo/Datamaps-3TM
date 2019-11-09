@@ -19,7 +19,6 @@ import fr.tm.datasmap.repository.ICeventRepo;
 import fr.tm.datasmap.repository.ICtypeRepo;
 import io.github.jeemv.springboot.vuejs.VueJS;
 import io.github.jeemv.springboot.vuejs.utilities.Http;
-import jdk.internal.net.http.frame.Http2Frame;
 
 @Controller
 @RequestMapping("/map/")
