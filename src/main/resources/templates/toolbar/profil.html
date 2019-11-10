@@ -2,41 +2,76 @@
   <v-dialog v-model="dialogProfil" persistent max-width="600px">
     <v-card>
       <v-card-title class="headline grey lighten-2" primary-title>
-          Profile management
+        Profile management
       </v-card-title>
-      
-      <!-- Card Profil Personnel  -->
-      <v-col
-          md="3"
-          class="ml-md-auto"
-        >
-      </v-col>
-      <v-card class="mx-auto" max-width="500" outlined>
-          
-        <v-list-item three-line>
-          <v-list-item-content>
-            <div class="overline mb-4">Information seen by other users</div>
-            <v-list-item-title class="headline mb-1">Identity</v-list-item-title>
-            <v-list-item-subtitle>Change your first or last name</v-list-item-subtitle>
-          </v-list-item-content>
-          <v-row  justify="center">
-            <v-img
-              src="https://image.flaticon.com/icons/svg/61/61205.svg"
-              aspect-ratio="1"
-              class="grey lighten-2"
-              max-width="80"
-              max-height="80"
-            ></v-img>
-          </v-row>
-        </v-list-item>
-      </v-card>
-      
 
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="dialogProfil = false">Close</v-btn>
-        <v-btn color="blue darken-1" text @click="dialogProfil = false">Save</v-btn>
-      </v-card-actions>
+      <!-- Card Profil Personnel  -->
+
+      <!-- Change Name -->
+      <v-col md="3" class="ml-md-auto">
+      </v-col>
+      <v-hover v-slot:default="{ hover }">
+        <v-card :elevation="hover ? 12 : 2" :class="{ 'on-hover': hover }" class="mx-auto" max-width="500" outlined>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <div class="overline mb-4">Information seen by other users</div>
+              <v-list-item-title class="headline mb-1">Identity</v-list-item-title>
+              <v-list-item-subtitle>Change your first or last name</v-list-item-subtitle>
+            </v-list-item-content>
+            <v-row class="card-profil">
+              <i class="material-icons icon-profil">
+                account_circle
+              </i>
+            </v-row>
+          </v-list-item>
+        </v-card>
+      </v-hover>
+        <v-col md="3" class="ml-md-auto">
+        </v-col>
+        <!-- Change Adresse -->
+        <v-hover v-slot:default="{ hover }">
+          <v-card :elevation="hover ? 12 : 2" :class="{ 'on-hover': hover }" class="mx-auto" max-width="500" outlined>
+            <v-list-item three-line>
+              <v-list-item-content>
+                <div class="overline mb-4">only you see it </div>
+                <v-list-item-title class="headline mb-1">Address</v-list-item-title>
+                <v-list-item-subtitle>Change your address</v-list-item-subtitle>
+              </v-list-item-content>
+              <v-row class="card-profil">
+                <i class="material-icons icon-profil">
+                  home
+                </i>
+              </v-row>
+            </v-list-item>
+          </v-card>
+        </v-hover>
+          <v-col md="3" class="ml-md-auto">
+          </v-col>
+          <!-- Change password -->
+          <v-hover v-slot:default="{ hover }">
+            <v-card :elevation="hover ? 12 : 2" :class="{ 'on-hover': hover }" class="mx-auto" max-width="500" outlined>
+              <v-list-item three-line>
+                <v-list-item-content>
+                  <div class="overline mb-4">only you see it</div>
+                  <v-list-item-title class="headline mb-1">Password</v-list-item-title>
+                  <v-list-item-subtitle>Change your Password</v-list-item-subtitle>
+                </v-list-item-content>
+                <v-row class="card-profil">
+                  <i class="material-icons icon-profil">
+                    https
+                  </i>
+                </v-row>
+              </v-list-item>
+            </v-card>
+          </v-hover>
+
+          <!-- Fin Card Profil Personnel  -->
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialogProfil = false">Close</v-btn>
+            <v-btn color="blue darken-1" text @click="dialogProfil = false">Save</v-btn>
+          </v-card-actions>
     </v-card>
   </v-dialog>
 </v-row>

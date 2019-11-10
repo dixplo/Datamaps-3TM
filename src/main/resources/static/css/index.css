@@ -16,3 +16,20 @@
 .container {
   padding: 0px;
 }
+
+/* CSS pour la page HTML Profil   */
+
+/* card profil pour changer name,mdp, etc */
+
+.card-profil {
+  flex-flow : row-reverse;
+  margin-right : 0px;
+}
+
+.icon-profil{
+  font-size-adjust: initial;
+  font-size: 80px;
+}
+
+
+/* FIN CSS HTML Profil   */
