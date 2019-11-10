@@ -44,6 +44,14 @@ public class MapController {
 
 		vue.addData("dialogChangeName", false);
 
+		// V Dialog ChangeEmail
+
+		vue.addData("dialogChangeEmail", false);
+
+		// V Dialog ChangePwd
+
+		vue.addData("dialogChangePwd", false);
+
 		// Fin Profil
 
 		vue.addData("dialogStandBy", false);

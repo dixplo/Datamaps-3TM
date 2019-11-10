@@ -31,7 +31,7 @@
         {{> toolbar/changeName}}
         <!-- Change Adresse -->
         <v-hover v-slot:default="{ hover }">
-          <v-card :elevation="hover ? 12 : 2" :class="{ 'on-hover': hover }" class="mx-auto" max-width="500" outlined>
+          <v-card :elevation="hover ? 12 : 2" :class="{ 'on-hover': hover }" class="mx-auto" max-width="500" outlined @click="dialogChangeEmail=true;">
             <v-list-item three-line>
               <v-list-item-content>
                 <div class="overline mb-4">only you see it </div>
@@ -48,9 +48,10 @@
         </v-hover>
           <v-col md="3" class="ml-md-auto">
           </v-col>
+          {{> toolbar/changeEmail}}
           <!-- Change password -->
           <v-hover v-slot:default="{ hover }">
-            <v-card :elevation="hover ? 12 : 2" :class="{ 'on-hover': hover }" class="mx-auto" max-width="500" outlined>
+            <v-card :elevation="hover ? 12 : 2" :class="{ 'on-hover': hover }" class="mx-auto" max-width="500" outlined @click="dialogChangePwd=true;">
               <v-list-item three-line>
                 <v-list-item-content>
                   <div class="overline mb-4">only you see it</div>
@@ -63,6 +64,7 @@
                   </i>
                 </v-row>
               </v-list-item>
+              {{> toolbar/changePwd}}
             </v-card>
           </v-hover>
 
