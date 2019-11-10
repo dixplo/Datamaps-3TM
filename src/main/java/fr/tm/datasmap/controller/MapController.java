@@ -40,6 +40,10 @@ public class MapController {
 
 		vue.addData("dialogProfil", false);
 
+		// V Dialog ChangeName
+
+		vue.addData("dialogChangeName", false);
+
 		// Fin Profil
 
 		vue.addData("dialogStandBy", false);
