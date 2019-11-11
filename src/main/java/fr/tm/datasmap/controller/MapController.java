@@ -1,14 +1,5 @@
 package fr.tm.datasmap.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.byteowls.jopencage.JOpenCageGeocoder;
-import com.byteowls.jopencage.model.JOpenCageForwardRequest;
-import com.byteowls.jopencage.model.JOpenCageLatLng;
-import com.byteowls.jopencage.model.JOpenCageResponse;
-import com.byteowls.jopencage.model.JOpenCageReverseRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -64,29 +55,41 @@ public class MapController {
 		vue.addData("dialogEvent", false);
 		vue.addData("validEvent", true);
 		vue.addData("lazyEvent", false);
-		vue.addData("tab_addVSlngLat", 0);
 		vue.addData("searchType", "");
-		vue.addDataRaw("event", "{title:'',description:'',start:null,end:null,type:'',lng:null,lat:null,address:''}");
+		vue.addDataRaw("editEvent",
+				"{title:'',description:'',start:null,end:null,type:'',lng:null,lat:null,address:''}");
+		vue.addDataRaw("objdate", "{startD:null,endD:null,startT:null,endT:null}");
+		vue.addDataRaw("currentDate", "new Date().toISOString().substr(0, 10)");
+		vue.addDataRaw("currentTime", "new Date().toISOString().substr(11, 8)");
 		// regle du formulaire event
 		vue.addDataRaw("TitleRules", "[v => !!v || 'Title is empty']");
 		vue.addDataRaw("DescriptionRules", "[v => !!v || 'Description is empty']");
-		vue.addDataRaw("AddressEventRules", "[v => !!v || 'Address is empty']");
 		vue.addDataRaw("TypeRules", "[v => !!v || 'Type is empty']");
-		vue.addDataRaw("LngRules", "[v => !!v || 'Longitude is empty']");
-		vue.addDataRaw("LatRules", "[v => !!v || 'Latitude is empty']");
+		vue.addDataRaw("CoordoRules", "[v => !!v || 'The coordinate is empty']");
 		// fin regle
-		vue.addMethod("showDialogEvent",
-				"if(this.conn){this.dialogEvent=true;}else{alert('You must be logged in to add an event!');this.showLogin();}");
+		vue.addMethod("showDialogEvent", "this.currentTime=new Date().toISOString().substr(11, 8);"
+				+ "if(this.conn){this.dialogEvent=true;}else{alert('You must be logged in to add an event!');this.showLogin();}");
+		vue.addMethod("hideDialogEvent", "this.dialogEvent=false;this.objdate={startD:null,endD:null,startT:null,endT:null};this.editEvent={title:'',description:'',start:null,end:null,type:'',lng:null,lat:null,address:''}");
 		vue.addMethod("goEvent", "this.map.flyTo([elem.lat, elem.lng], 15);", "elem");
-		vue.addMethod("addEvent",
-				"let self =this;let $=' ';" + Http.get("'/rest/ctype/'+self.event.type+$",
-						"self.event.type=response.data;", "self.event.type=null;") + "if(self.event.type!=null){"
-						+ "if(self.tab_addVSlngLat==0){"
-						+ Http.get("'/rest/cevent/getlatlng/'+self.event.address+$",
-								"if(response.data!=''){self.event.lat=response.data[0];self.event.lng=response.data[1];console.log(self.event);}" + "")
-						+ "}else{" + Http.get("'/rest/cevent/getaddress/'+self.event.lng+'/'+self.event.lat+$",
-								"console.log(response.data);")
-						+ "}" + "}else{alert('erreur avec type')}");//note pour moi reste a faire la verif du get address et les timestamp 
+		// add event
+		vue.addMethod("addEvent", "let self =this;self.dialogStandBy=true;self.eventGetLatLng();");
+		vue.addMethod("eventGetLatLng", "let self =this;let $=' ';" + Http.get(
+				"'/rest/cevent/getlatlng/'+self.editEvent.address+$",
+				"if(response.data!=''){self.editEvent.lat=response.data[0];self.editEvent.lng=response.data[1];console.log(self.editEvent);"
+						+ "self.eventGetTime();" + "}else{self.dialogStandBy=false;alert('erreur avec adresse');}"));
+		vue.addMethod("eventGetTime", "let self =this;let $=' ';"
+				+ "if(self.objdate.startD!=null&&self.objdate.endD!=null&&self.objdate.startT!=null&&self.objdate.endT!=null){"
+				+ Http.get(
+						"'/rest/cevent/gettimestamp/'+self.objdate.startD+'/'+self.objdate.startT+'/'+self.objdate.endD+'/'+self.objdate.endT+$",
+						"self.editEvent.start=response.data[0];self.editEvent.end=response.data[1];console.log(self.editEvent);self.addFinalEvent();")
+				+ "}else{self.dialogStandBy=false;alert('The Date and time must be valid!');}");
+		vue.addMethod("addFinalEvent", "let self =this;let $=' ';" + Http.post("'/rest/cevent/'+self.editEvent.type+$", "self.editEvent",
+				"console.log(response.data);"
+						+ "var eventIcon = L.icon({ iconUrl: '/img/geopoint_events.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
+						+ "var marker = L.marker([response.data.lat, response.data.lng], { icon: eventIcon }).addTo(self.map);self.dialogStandBy=false;self.dialogEvent=false;self.goEvent(response.data);"
+						+ "self.allEvent.push(response.data);",
+						"console.log(response.data);self.dialogStandBy=false;"));
+		// end add event
 
 		vue.addData("conn", false);
 		vue.addDataRaw("user", "{name:'',fname:'',email:''}");

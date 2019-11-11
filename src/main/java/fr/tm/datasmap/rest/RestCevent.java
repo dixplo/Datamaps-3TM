@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.tm.datasmap.entity.Cevent;
 import fr.tm.datasmap.repository.ICeventRepo;
-
+import fr.tm.datasmap.repository.ICtypeRepo;
 
 @RestController
 @RequestMapping("/rest/cevent/")
@@ -29,6 +29,9 @@ public class RestCevent {
 
 	@Autowired
 	private ICeventRepo eventRepo;
+
+	@Autowired
+	private ICtypeRepo typeRepo;
 
 	@GetMapping("")
 	public List<Cevent> getAll() {
@@ -43,22 +46,12 @@ public class RestCevent {
 		}
 		return null;
     }
-    
-    @GetMapping("one")
-    public Cevent setOne(){
-        double lng =-0.3690815;
-		Cevent event = new Cevent("title exemple", "description exemple",
-				new Timestamp(Calendar.getInstance().getTimeInMillis()),
-				new Timestamp(Calendar.getInstance().getTimeInMillis()), (double) 49.1828008, lng,
-				"Caen");
-        eventRepo.saveAndFlush(event);
-        return event;
-    }
 
-	@PostMapping("")
-	public Cevent getOne(@RequestBody Cevent event) {
-		
-		return null;
+	@PostMapping("{type}")
+	public Cevent save(@RequestBody Cevent event,@PathVariable String type) {
+		event.setType(typeRepo.findOneByTitle(type));
+		eventRepo.saveAndFlush(event);
+		return event;
 	}
 	
 	@GetMapping("getaddress/{lng}/{lat}")
@@ -90,5 +83,30 @@ public class RestCevent {
 			return list;
 		}
 		return null;
+	}
+
+	@GetMapping("gettimestamp/{SD}/{ST}/{ED}/{ET}")
+	public List<Timestamp> getTimestamp(@PathVariable String SD, @PathVariable String ST, @PathVariable String ED, @PathVariable String ET){
+		Calendar start = Calendar.getInstance();
+		String Dstart[] = SD.split("-");
+		String Tstart[] = ST.split(":");
+		List<String> starts = new ArrayList<>();
+		for (String string : Dstart) { starts.add(string); }
+		for (String string : Tstart) { starts.add(string); }
+
+		Calendar end = Calendar.getInstance();
+		String Dend[] = ED.split("-");
+		String Tend[] = ET.split(":");
+		List<String> ends = new ArrayList<>();
+		for (String string : Dend) { ends.add(string); }
+		for (String string : Tend) { ends.add(string); }
+		
+		start.set(Integer.parseInt(starts.get(0)),Integer.parseInt(starts.get(1))-1,Integer.parseInt(starts.get(2)),Integer.parseInt(starts.get(3))+1,Integer.parseInt(starts.get(4)));
+		end.set(Integer.parseInt(ends.get(0)), Integer.parseInt(ends.get(1))-1, Integer.parseInt(ends.get(2)), Integer.parseInt(ends.get(3))+1, Integer.parseInt(ends.get(4)));
+		 
+		List<Timestamp> result = new ArrayList<>();
+		result.add(new Timestamp(start.getTimeInMillis()));
+		result.add(new Timestamp(end.getTimeInMillis()));
+		return result;
 	}
 }
