@@ -1,6 +1,7 @@
 # Project Datamaps
-Equipe 3TM
-## L'equipe
+
+**technology used** (Java, VueJS)
+## L'equipe 3TM
 Thomas Holley , Thomas Fontaine , Martin Jeanne , Theo Marie
 
 
