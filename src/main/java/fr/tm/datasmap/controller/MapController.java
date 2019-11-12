@@ -45,6 +45,9 @@ public class MapController {
 
 		// Fin Profil
 
+		vue.addData("navigDrawer", false);
+
+
 		vue.addData("dialogStandBy", false);
 		vue.addData("loadingRegLog", false);
 
@@ -64,6 +67,7 @@ public class MapController {
 		vue.addData("validEvent", true);
 		vue.addData("lazyEvent", false);
 		vue.addData("searchType", "");
+		vue.addData("searchevent", "");
 		vue.addDataRaw("editEvent",
 				"{title:'',description:'',start:null,end:null,type:'',lng:null,lat:null,address:''}");
 		vue.addDataRaw("objdate", "{startD:null,endD:null,startT:null,endT:null}");
