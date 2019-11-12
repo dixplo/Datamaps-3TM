@@ -47,7 +47,6 @@ public class MapController {
 
 		vue.addData("navigDrawer", false);
 
-
 		vue.addData("dialogStandBy", false);
 		vue.addData("loadingRegLog", false);
 
@@ -81,7 +80,8 @@ public class MapController {
 		// fin regle
 		vue.addMethod("showDialogEvent", "this.currentTime=new Date().toISOString().substr(11, 8);"
 				+ "if(this.conn){this.dialogEvent=true;}else{alert('You must be logged in to add an event!');this.showLogin();}");
-		vue.addMethod("hideDialogEvent", "this.dialogEvent=false;this.objdate={startD:null,endD:null,startT:null,endT:null};this.editEvent={title:'',description:'',start:null,end:null,type:'',lng:null,lat:null,address:''}");
+		vue.addMethod("hideDialogEvent",
+				"this.dialogEvent=false;this.objdate={startD:null,endD:null,startT:null,endT:null};this.editEvent={title:'',description:'',start:null,end:null,type:'',lng:null,lat:null,address:''}");
 		vue.addMethod("goEvent", "this.map.flyTo([elem.lat, elem.lng], 15);", "elem");
 		// add event
 		vue.addMethod("addEvent", "let self =this;self.dialogStandBy=true;self.eventGetLatLng();");
@@ -95,12 +95,13 @@ public class MapController {
 						"'/rest/cevent/gettimestamp/'+self.objdate.startD+'/'+self.objdate.startT+'/'+self.objdate.endD+'/'+self.objdate.endT+$",
 						"self.editEvent.start=response.data[0];self.editEvent.end=response.data[1];console.log(self.editEvent);self.addFinalEvent();")
 				+ "}else{self.dialogStandBy=false;alert('The Date and time must be valid!');}");
-		vue.addMethod("addFinalEvent", "let self =this;let $=' ';" + Http.post("'/rest/cevent/'+self.editEvent.type+$", "self.editEvent",
+		vue.addMethod("addFinalEvent", "let self =this;let $=' ';" + Http.post("'/rest/cevent/'+self.editEvent.type+$",
+				"self.editEvent",
 				"console.log(response.data);"
 						+ "var eventIcon = L.icon({ iconUrl: '/img/geopoint_events.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
 						+ "var marker = L.marker([response.data.lat, response.data.lng], { icon: eventIcon }).addTo(self.map);self.dialogStandBy=false;self.dialogEvent=false;self.goEvent(response.data);"
 						+ "self.allEvent.push(response.data);",
-						"console.log(response.data);self.dialogStandBy=false;"));
+				"console.log(response.data);self.dialogStandBy=false;"));
 		// end add event
 
 		vue.addData("conn", false);
@@ -143,10 +144,11 @@ public class MapController {
 		vue.addMethod("initmap", "this.map= L.map('map').setView([48.852969, 2.349903], 11);"
 				+ "L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {" + "attribution: '©3T',"
 				+ "minZoom: 1,maxZoom: 20" + "}).addTo(this.map);let self=this;"
-				+ Http.get("/rest/cevent/",
-						"var eventIcon = L.icon({ iconUrl: '/img/geopoint_events.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
-								+ "for (var i=0;i<response.data.length;i++) {var marker = L.marker([response.data[i].lat, response.data[i].lng], { icon: eventIcon }).addTo(self.map);}",
-						"console.log(response.data);"));
+				+ Http.get("/rest/ctype/", "response.data.forEach(function(element) {"
+						+ "var eventIcon = L.icon({ iconUrl: '/img/geopoint_'+element.title+'.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
+						+ "element.events.forEach(function(event) {"
+						+ "var marker = L.marker([event.lat, event.lng], { icon: eventIcon }).addTo(self.map).bindPopup('<b>'+event.title+'</b></br>'+event.description);"
+						+ "});" + "});", "console.log(response.data);"));
 
 		vue.onMounted("this.initmap();");
 
