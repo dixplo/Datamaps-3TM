@@ -1,14 +1,2 @@
 <v-autocomplete v-model="searchevent" :items="allEvent" filled chips color="blue-grey lighten-2" label="Search event"
-    item-text="title" item-value="title">
-
-    <template v-slot:selection="allEvent">
-        <v-chip v-bind="allEvent.attrs" :input-value="allEvent.selected" close @click="allEvent.select"
-            @click:close="remove(allEvent.item)">
-            
-            
-        </v-chip>
-    </template>
-    
-    
-
-</v-autocomplete>
+    item-text="title" item-value="title"></v-autocomplete>

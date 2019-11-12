@@ -1,8 +1,11 @@
 package fr.tm.datasmap.rest;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,15 +48,15 @@ public class RestCevent {
 			return user.get();
 		}
 		return null;
-    }
+	}
 
 	@PostMapping("{type}")
-	public Cevent save(@RequestBody Cevent event,@PathVariable String type) {
+	public Cevent save(@RequestBody Cevent event, @PathVariable String type) {
 		event.setType(typeRepo.findOneByTitle(type));
 		eventRepo.saveAndFlush(event);
 		return event;
 	}
-	
+
 	@GetMapping("getaddress/{lng}/{lat}")
 	public String getAddress(@PathVariable double lng, @PathVariable double lat) {
 		JOpenCageGeocoder jOpenCageGeocoder = new JOpenCageGeocoder("b9798ccd7a31461f8f3396c15ed64160");
@@ -71,12 +74,12 @@ public class RestCevent {
 	}
 
 	@GetMapping("getlatlng/{address}")
-	public List<Double> getLngLat(@PathVariable String address){
+	public List<Double> getLngLat(@PathVariable String address) {
 		JOpenCageGeocoder jOpenCageGeocoder = new JOpenCageGeocoder("b9798ccd7a31461f8f3396c15ed64160");
 		JOpenCageForwardRequest request = new JOpenCageForwardRequest(address);
-		
+
 		JOpenCageResponse response = jOpenCageGeocoder.forward(request);
-		List<Double> list =new ArrayList<Double>();
+		List<Double> list = new ArrayList<Double>();
 		if (!response.getResults().isEmpty()) {
 			list.add(response.getResults().get(0).getGeometry().getLat());
 			list.add(response.getResults().get(0).getGeometry().getLng());
@@ -86,27 +89,12 @@ public class RestCevent {
 	}
 
 	@GetMapping("gettimestamp/{SD}/{ST}/{ED}/{ET}")
-	public List<Timestamp> getTimestamp(@PathVariable String SD, @PathVariable String ST, @PathVariable String ED, @PathVariable String ET){
-		Calendar start = Calendar.getInstance();
-		String Dstart[] = SD.split("-");
-		String Tstart[] = ST.split(":");
-		List<String> starts = new ArrayList<>();
-		for (String string : Dstart) { starts.add(string); }
-		for (String string : Tstart) { starts.add(string); }
+	public List<Timestamp> getTimestamp(@PathVariable String SD, @PathVariable String ST, @PathVariable String ED, @PathVariable String ET) throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 
-		Calendar end = Calendar.getInstance();
-		String Dend[] = ED.split("-");
-		String Tend[] = ET.split(":");
-		List<String> ends = new ArrayList<>();
-		for (String string : Dend) { ends.add(string); }
-		for (String string : Tend) { ends.add(string); }
-		
-		start.set(Integer.parseInt(starts.get(0)),Integer.parseInt(starts.get(1))-1,Integer.parseInt(starts.get(2)),Integer.parseInt(starts.get(3))+1,Integer.parseInt(starts.get(4)));
-		end.set(Integer.parseInt(ends.get(0)), Integer.parseInt(ends.get(1))-1, Integer.parseInt(ends.get(2)), Integer.parseInt(ends.get(3))+1, Integer.parseInt(ends.get(4)));
-		 
 		List<Timestamp> result = new ArrayList<>();
-		result.add(new Timestamp(start.getTimeInMillis()));
-		result.add(new Timestamp(end.getTimeInMillis()));
+		result.add(new Timestamp((dateFormat.parse(SD+" "+ST)).getTime()));
+		result.add(new Timestamp(dateFormat.parse(ED+" "+ET).getTime()));
 		return result;
 	}
 }

@@ -95,10 +95,10 @@ public class MapController {
 						"'/rest/cevent/gettimestamp/'+self.objdate.startD+'/'+self.objdate.startT+'/'+self.objdate.endD+'/'+self.objdate.endT+$",
 						"self.editEvent.start=response.data[0];self.editEvent.end=response.data[1];console.log(self.editEvent);self.addFinalEvent();")
 				+ "}else{self.dialogStandBy=false;alert('The Date and time must be valid!');}");
-		vue.addMethod("addFinalEvent", "let self =this;let $=' ';" + Http.post("'/rest/cevent/'+self.editEvent.type+$",
+		vue.addMethod("addFinalEvent", "let self =this;let $=' ';let type =self.editEvent.type;" + Http.post("'/rest/cevent/'+self.editEvent.type+$",
 				"self.editEvent",
 				"console.log(response.data);"
-						+ "var eventIcon = L.icon({ iconUrl: '/img/geopoint_events.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
+						+ "var eventIcon = L.icon({ iconUrl: '/img/geopoint_'+type+'.png', iconSize: [50, 50],iconAnchor: [25, 50],popupAnchor: [-3, -76],});"
 						+ "var marker = L.marker([response.data.lat, response.data.lng], { icon: eventIcon }).addTo(self.map);self.dialogStandBy=false;self.dialogEvent=false;self.goEvent(response.data);"
 						+ "self.allEvent.push(response.data);",
 				"console.log(response.data);self.dialogStandBy=false;"));

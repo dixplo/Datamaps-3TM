@@ -1,14 +1,19 @@
 package fr.tm.datasmap.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Cevent {
@@ -18,8 +23,14 @@ public class Cevent {
 	private Long id;
 	private String title;
 	private String description;
-	private Timestamp start;
-	private Timestamp end;
+	@Basic
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date start;
+	@Basic
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date end;
 	@JsonIgnore
 	@ManyToOne
 	private Ctype type;
@@ -27,7 +38,7 @@ public class Cevent {
 	private Double lat;
 	private String address;
 
-	public Cevent(Long id, String title, String description, Timestamp start, Timestamp end, Ctype type, Double lng,
+	public Cevent(Long id, String title, String description, Date start, Date end, Ctype type, Double lng,
 			Double lat, String address) {
 		this.id = id;
 		this.title = title;
@@ -40,7 +51,7 @@ public class Cevent {
 		this.address = address;
 	}
 
-	public Cevent(Long id, String title, String description, Timestamp start, Timestamp end, Ctype type, Double lng,
+	public Cevent(Long id, String title, String description, Date start, Date end, Ctype type, Double lng,
 			Double lat) {
 		this.id = id;
 		this.title = title;
@@ -52,7 +63,7 @@ public class Cevent {
 		this.lat = lat;
 	}
 
-	public Cevent(String title, String description, Timestamp start, Timestamp end, Double lng, Double lat) {
+	public Cevent(String title, String description, Date start, Date end, Double lng, Double lat) {
 		this.title = title;
 		this.description = description;
 		this.start = start;
@@ -61,7 +72,7 @@ public class Cevent {
 		this.lat = lat;
 	}
 
-	public Cevent(String title, String description, Timestamp start, Timestamp end, Double lng, Double lat,
+	public Cevent(String title, String description, Date start, Date end, Double lng, Double lat,
 			String address) {
 		this.title = title;
 		this.description = description;
@@ -72,7 +83,7 @@ public class Cevent {
 		this.address = address;
 	}
 
-	public Cevent(Long id, String title, String description, Timestamp start, Timestamp end, Ctype type) {
+	public Cevent(Long id, String title, String description, Date start, Date end, Ctype type) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -81,7 +92,7 @@ public class Cevent {
 		this.type = type;
 	}
 
-	public Cevent(String title, String description, Timestamp start, Timestamp end) {
+	public Cevent(String title, String description, Date start, Date end) {
 		this.title = title;
 		this.description = description;
 		this.start = start;
@@ -115,19 +126,19 @@ public class Cevent {
 		this.description = description;
 	}
 
-	public Timestamp getStart() {
+	public Date getStart() {
 		return this.start;
 	}
 
-	public void setStart(Timestamp start) {
+	public void setStart(Date start) {
 		this.start = start;
 	}
 
-	public Timestamp getEnd() {
+	public Date getEnd() {
 		return this.end;
 	}
 
-	public void setEnd(Timestamp end) {
+	public void setEnd(Date end) {
 		this.end = end;
 	}
 
