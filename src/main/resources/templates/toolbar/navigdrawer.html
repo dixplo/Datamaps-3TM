@@ -66,12 +66,6 @@
     </v-list>
 
     <v-list>
-        <v-list-item>
-            <v-list-item-icon>
-                <v-icon>mdi-home-plus</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Add Sites</v-list-item-title>
-        </v-list-item>
         <v-list-group nav>
             <template v-slot:activator>
                 <v-list-item link>
@@ -81,16 +75,11 @@
                     <v-list-item-title>Sites List</v-list-item-title>
                 </v-list-item>
             </template>
+            {{> site/displaysite}}
         </v-list-group>
     </v-list>
 
     <v-list>
-        <v-list-item>
-            <v-list-item-icon>
-                <v-icon>mdi-map-marker-plus</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Add Places</v-list-item-title>
-        </v-list-item>
         <v-list-group nav>
             <template v-slot:activator>
                 <v-list-item link>
@@ -100,6 +89,7 @@
                     <v-list-item-title>Places List</v-list-item-title>
                 </v-list-item>
             </template>
+            {{> place/displayplace}}
         </v-list-group>
     </v-list>
 
