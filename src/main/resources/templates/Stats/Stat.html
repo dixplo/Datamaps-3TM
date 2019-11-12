@@ -1,0 +1,69 @@
+<v-dialog v-model="dialogStat" scrollable max-width="800px">
+  <v-card flat tile>
+      <v-card-title>Stats</v-card-title>
+      <v-card-text>
+          <v-container>
+              <v-form ref="form" v-model="validEvent" :lazy-validation="lazyEvent">
+                  <v-row>
+                      <v-col>
+                          <v-text-field v-model="editEvent.title" label="Title" outlined required :rules="NameRules">
+                          </v-text-field>
+                      </v-col>
+                  </v-row>
+                  <v-row>
+                      <v-col>
+                          <v-textarea v-model="editEvent.description" label="Description" outlined required
+                              :rules="DescriptionRules">
+                          </v-textarea>
+                      </v-col>
+                  </v-row>
+                  <v-row>
+                      <v-col>
+                          <v-autocomplete v-model="editEvent.type" :items="types" label="Type" outlined required
+                              :search-input.sync="searchType" clearable hide-details item-text="title"
+                              :rules="TypeRules">
+                          </v-autocomplete>
+                      </v-col>
+                  </v-row>
+                  <v-row>
+                      <v-col>
+                          <v-text-field v-model="editEvent.address" label="Address" outlined required
+                              :rules="CoordoRules">
+                          </v-text-field>
+                      </v-col>
+                  </v-row>
+                  <v-row justify="space-around" align="center">
+                      <v-col style="width: 350px; flex: 0 1 auto;">
+                          <h4>Start date:</h4>
+                          <v-date-picker v-model="objdate.startD" :min="currentDate" required>
+                          </v-date-picker>
+                      </v-col>
+                      <v-col style="width: 350px; flex: 0 1 auto;">
+                          <h4>Start time:</h4>
+                          <v-time-picker :disabled="objdate.startD==null" v-model="objdate.startT"
+                              format="24hr">
+                          </v-time-picker>
+                      </v-col>
+                  </v-row>
+                  <v-row justify="space-around" align="center">
+                      <v-col style="width: 350px; flex: 0 1 auto;">
+                          <h4>End date:</h4>
+                          <v-date-picker :disabled="objdate.startT==null" v-model="objdate.endD" :min="objdate.startD"
+                              required></v-date-picker>
+                      </v-col>
+                      <v-col style="width: 350px; flex: 0 1 auto;">
+                          <h4>End time:</h4>
+                          <v-time-picker :disabled="objdate.endD==null" v-model="objdate.endT" format="24hr">
+                          </v-time-picker>
+                      </v-col>
+                  </v-row>
+              </v-form>
+          </v-container>
+      </v-card-text>
+      <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="hideDialogEvent">Cancel</v-btn>
+          <v-btn text @click="addEvent" :disabled="!validEvent" color="success">Publish</v-btn>
+      </v-card-actions>
+  </v-card>
+</v-dialog>

@@ -2,10 +2,11 @@
     <template v-slot:prepend>
         <v-list>
             <v-list-item>
-                <v-list-item-avatar size="62" >
-                 <v-icon v-if="!conn">mdi-account-circle-outline</v-icon> 
-                  <v-img  v-if="conn" @click="dialogProfil=true;" src="https://randomuser.me/api/portraits/lego/1.jpg"></v-img>
-                  {{> toolbar/profil}}
+                <v-list-item-avatar size="62">
+                    <v-icon v-if="!conn">mdi-account-circle-outline</v-icon>
+                    <v-img v-if="conn" @click="dialogProfil=true;" src="https://randomuser.me/api/portraits/lego/1.jpg">
+                    </v-img>
+                    {{> toolbar/profil}}
                 </v-list-item-avatar>
                 <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showLogin">Login</v-btn>
                 <v-btn v-if="!conn" color="primary" class="ma-2" dark @click="showRegister">Register</v-btn>
@@ -26,6 +27,20 @@
                         <v-icon>mdi-flag</v-icon>
                     </v-list-item-icon>
                 </v-list-item>
+
+                <v-list-item :key="0" link>
+                    <v-list-item-title>My Sites</v-list-item-title>
+                    <v-list-item-icon>
+                        <v-icon>mdi-home</v-icon>
+                    </v-list-item-icon>
+                </v-list-item>
+
+                <v-list-item :key="0" link>
+                    <v-list-item-title>My Places</v-list-item-title>
+                    <v-list-item-icon>
+                        <v-icon>mdi-map-marker</v-icon>
+                    </v-list-item-icon>
+                </v-list-item>
             </v-list-group>
         </v-list>
     </template>
@@ -33,24 +48,63 @@
     <v-divider></v-divider>
     {{> event/formevent}}
     <v-list>
-        <v-list-item link @click="showDialogEvent">
-            <v-list-item-icon>
-                <v-icon>mdi-flag-plus</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Add Event</v-list-item-title>
-        </v-list-item>
+        
         <v-list-group nav>
             <template v-slot:activator>
                 <v-list-item link>
                     <v-list-item-icon>
                         <v-icon>mdi-flag</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-title>Event List</v-list-item-title>
+                    <v-list-item-title>Event</v-list-item-title>
                 </v-list-item>
             </template>
             {{> event/displayevent}}
         </v-list-group>
     </v-list>
+
+    <v-list>
+        <v-list-item>
+            <v-list-item-icon>
+                <v-icon>mdi-home-plus</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Add Sites</v-list-item-title>
+        </v-list-item>
+        <v-list-group nav>
+            <template v-slot:activator>
+                <v-list-item link>
+                    <v-list-item-icon>
+                        <v-icon>mdi-home</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Sites List</v-list-item-title>
+                </v-list-item>
+            </template>
+        </v-list-group>
+    </v-list>
+
+    <v-list>
+        <v-list-item>
+            <v-list-item-icon>
+                <v-icon>mdi-map-marker-plus</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Add Places</v-list-item-title>
+        </v-list-item>
+        <v-list-group nav>
+            <template v-slot:activator>
+                <v-list-item link>
+                    <v-list-item-icon>
+                        <v-icon>mdi-map-marker</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Places List</v-list-item-title>
+                </v-list-item>
+            </template>
+        </v-list-group>
+    </v-list>
+
+    <v-divider></v-divider>
+
+    <v-btn  color="primary" class="ma-2" dark ><v-icon>mdi-chart-bar</v-icon></v-btn>
+
+
     <template v-slot:append v-if="conn">
         <v-divider></v-divider>
         <div class="pa-2">

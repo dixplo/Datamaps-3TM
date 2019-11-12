@@ -1,3 +1,17 @@
+
+<v-list-item link @click="showDialogEvent">
+    <v-list-item-icon>
+        <v-icon>mdi-flag-plus</v-icon>
+    </v-list-item-icon>
+    <v-list-item-title>Add Event</v-list-item-title>
+</v-list-item>
+<v-list-item link>
+    <v-list-item-icon>
+        <v-icon>mdi-map-search</v-icon>
+    </v-list-item-icon>
+    <v-list-item-title><v-text-field>blabla</v-text-field></v-list-item-title>
+
+</v-list-item>
 <v-tabs dark background-color="darken-3" center-active show-arrows>
     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
     <v-tab :key="0">
@@ -34,7 +48,7 @@
 
                 <v-list-item-action>
                     <v-btn icon>
-                        <v-icon color="grey lighten-1" @click="console.log(elem);">mdi-information</v-icon>
+                        <v-icon color="grey lighten-1">mdi-information</v-icon>
                     </v-btn>
                 </v-list-item-action>
             </v-list-item>
