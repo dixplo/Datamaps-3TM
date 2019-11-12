@@ -1,4 +1,7 @@
-<v-navigation-drawer expand-on-hover permanent fixed width="30%" id="navi">
+<v-btn color="blue darken-2" dark fab id="fab" absolute @click.stop="navigDrawer = !navigDrawer">
+    <v-icon>mdi-menu</v-icon>
+</v-btn>
+<v-navigation-drawer v-model="navigDrawer" absolute temporary width="30%" id="navi">
     <template v-slot:prepend>
         <v-list>
             <v-list-item>
@@ -48,7 +51,7 @@
     <v-divider></v-divider>
     {{> event/formevent}}
     <v-list>
-        
+
         <v-list-group nav>
             <template v-slot:activator>
                 <v-list-item link>
@@ -102,7 +105,11 @@
 
     <v-divider></v-divider>
 
-    <v-btn  color="primary" class="ma-2" dark ><v-icon>mdi-chart-bar</v-icon></v-btn>
+    <div class="pa-2">
+        <v-btn color="primary" block dark>
+            <v-icon>mdi-chart-bar</v-icon>
+        </v-btn>
+    </div>
 
 
     <template v-slot:append v-if="conn">

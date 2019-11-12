@@ -2,15 +2,19 @@
   max-height: 1200px;
   min-height: 100vh;
   max-width: 100%;
-  overflow: hidden;
+  position: relative;
   padding: none;
   z-index: 0;
-  left: 80px;
   top: 0px;
 }
 
-#navi{
+#fab{
+  margin: 10px 50px;
   z-index: 1;
+}
+
+#navi{
+  z-index: 2;
 }
 
 .container {

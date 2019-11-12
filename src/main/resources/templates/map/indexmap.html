@@ -1,7 +1,8 @@
 {{> header}}
 <v-container fluid class="mapsPadding">
   {{> toolbar/navigdrawer}}
-  <div id="map"></div>
+  <div id="map" 
+  class="overflow-hidden"></div>
   {{> map/maps}}
   <v-dialog v-model="dialogStandBy" hide-overlay persistent width="300">
     <v-card color="primary" dark>
