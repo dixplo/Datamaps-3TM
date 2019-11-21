@@ -111,7 +111,7 @@ public class MapController {
 		vue.addDataRaw("FnameRules", "[v => !!v || 'Firstname is empty']");
 		vue.addDataRaw("AddressRules", "[v => !!v || 'Address is empty']");
 		vue.addDataRaw("EmailRules",
-				"[v => !!v || 'E-mail is empty', v => /.+@.+/. test(v) || 'E-mail must be valid']");
+				"[v => !!v || 'E-mail is empty', v => /.+@.+\\..+/. test(v) || 'E-mail must be valid']");
 		vue.addDataRaw("PasswordRules", "[v => !!v || 'Password is empty']");
 		// fin regle
 
