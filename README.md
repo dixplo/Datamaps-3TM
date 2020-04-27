@@ -1,10 +1,111 @@
-# Project Datamaps
+# Datamaps Project
 
-**technology used** (Java, VueJS)
-## L'equipe 3TM
-Thomas Holley , Thomas Fontaine , Martin Jeanne , Theo Marie
+The project aims to display a map with the possibility of displaying various current events. Events are published by users.
+
+###### Technology Used
+- Java
+- VueJS
+
+# Contributors :
+
+Thomas Holley, Thomas Fontaine, Theo Marie
+
+# Operators :
+
+- dataAdmin (accessing data)
+- User (accessing events)
+- Viewer (consultation)
+
+# Features
+
+- Login in
+- Log out
+- sign up
+- Manage rights by user type
+- Access dashboard
+- Display a list (events, places, sites…)
+
+### UpStream
+- Manage sites
+- Manage locations
+- API data recovery
+- Navigation
+- geolocalize users
+- display the map(events, places, sites…)
+- add an event on a places (modification and delete)
+- share event
+- Display/filter on events (type)
+- search on events by proximity or location
+
+### Statistics
+- user can create her own stats
+- consult stats on a location
+- consult stats on a event or Type
 
 
-### Description du projet :
- Login et register fait
+# Project specifications :
+
+## Dependency :
+Depedency of the project
+
+- Spring : Provides a comprehensive programming and configuration model for modern Java-based enterprise applications.
+- Maven : allow a developer to comprehend the complete state of a development effort in the shortest period of time.
+
+## Frameworks :
+Frameworks used
+
+- Spring 
+- VueJS : progressive framework for building user interfaces. 
+
+## API :
+API used
+
+- [Google Map](https://cloud.google.com/maps-platform).
+
+## Deployment :
+Project deployment used
+
+- Heroku
+
+## IDE
+Development environment used
+
+- Visual Studio Code
+
+----------------------------------------------------------------------------------------------------------
+
+# Start the project :
+After download the project, in function of your development environment
+
+### Eclipse
+
+Execute the Application class
+
+### Heroku
+
+Putt the .jar packaging in pom.xml
+
+### Local
+With the command prompt :
+Maven :
+```
+mvn spring-boot:run
+```
+By executing the packaged app:
+```
+java -jar target/myapplication-0.0.1-SNAPSHOT.jar
+```
+
+
+
+
+# Screenshots of operation :
+
+
+
+
+
+
+
+
 
