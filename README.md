@@ -1,4 +1,5 @@
 # Datamaps Project
+:calendar: September to November 2019 | :warning: Be careful to the java version  | :no_mobile_phones:: only on computer
 
 The project aims to display a map with the possibility of displaying various current events. Events are published by users.
 
@@ -7,8 +8,10 @@ The project aims to display a map with the possibility of displaying various cur
 - VueJS
 
 # Contributors :
+students on BTS SIO on the Saint Ursule High School in Caen.
 
 Thomas Holley, Thomas Fontaine, Theo Marie
+
 
 # Operators :
 
@@ -67,7 +70,7 @@ Project deployment used
 
 - Heroku
 
-## IDE
+## IDE :
 Development environment used
 
 - Visual Studio Code
@@ -99,7 +102,7 @@ java -jar target/myapplication-0.0.1-SNAPSHOT.jar
 
 
 
-# Screenshots of operation :
+# Screenshots
 
 
 
