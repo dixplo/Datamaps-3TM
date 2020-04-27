@@ -1,25 +1,26 @@
 # Datamaps Project
+
 :calendar: September to November 2019 | :warning: Be careful to the java version  | :no_mobile_phones:: only on computer
 
 The project aims to display a map with the possibility of displaying various current events. Events are published by users.
 
-###### Technology Used
+#### Technology Used
 - Java
 - VueJS
 
-# Contributors :
+## Contributors :
 students on BTS SIO on the Saint Ursule High School in Caen.
 
 Thomas Holley, Thomas Fontaine, Theo Marie
 
 
-# Operators :
+## Operators :
 
 - dataAdmin (accessing data)
 - User (accessing events)
 - Viewer (consultation)
 
-# Features
+## Features
 
 - Login in
 - Log out
@@ -46,38 +47,38 @@ Thomas Holley, Thomas Fontaine, Theo Marie
 - consult stats on a event or Type
 
 
-# Project specifications :
+## Project specifications :
 
-## Dependency :
+### Dependency :
 Depedency of the project
 
 - Spring : Provides a comprehensive programming and configuration model for modern Java-based enterprise applications.
 - Maven : allow a developer to comprehend the complete state of a development effort in the shortest period of time.
 
-## Frameworks :
+### Frameworks :
 Frameworks used
 
 - Spring 
 - VueJS : progressive framework for building user interfaces. 
 
-## API :
+### API :
 API used
 
 - [Google Map](https://cloud.google.com/maps-platform).
 
-## Deployment :
+### Deployment :
 Project deployment used
 
 - Heroku
 
-## IDE :
+### IDE :
 Development environment used
 
 - Visual Studio Code
 
 ----------------------------------------------------------------------------------------------------------
 
-# Start the project :
+## Start the project :
 After download the project, in function of your development environment
 
 ### Eclipse
@@ -102,7 +103,7 @@ java -jar target/myapplication-0.0.1-SNAPSHOT.jar
 
 
 
-# Screenshots
+## Screenshots
 
 
 
