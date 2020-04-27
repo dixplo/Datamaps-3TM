@@ -11,7 +11,7 @@ The project aims to display a map with the possibility of displaying various cur
 ## Contributors :
 students on BTS SIO on the Saint Ursule High School in Caen.
 
-Thomas Holley :underage:, Thomas Fontaine, Theo Marie :kiss:
+Thomas Holley, Thomas Fontaine, Theo Marie
 
 
 ## Operators :
