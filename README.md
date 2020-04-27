@@ -5,6 +5,7 @@
 The project aims to display a map with the possibility of displaying various current events. Events are published by users.
 
 #### Technology Used
+- Spring
 - Java
 - VueJS
 
