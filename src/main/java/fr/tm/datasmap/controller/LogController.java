@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import io.github.jeemv.springboot.vuejs.VueJS;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/")
 public class LogController {
 
 	@Autowired
