@@ -72,10 +72,12 @@
 		</dependency>
 	</dependencies>
 
+	<repositories>
 	<repository>
     <id>JCenter</id>
     <url>https://jcenter.bintray.com/</url>
 	</repository>
+	</repositories>
 
 	<build>
 		<plugins>
