@@ -73,8 +73,8 @@
 	</dependencies>
 
 	<repository>
-    <id>maven2</id>
-    <url>http://repo1.maven.org/maven2</url>
+    <id>JCenter</id>
+    <url>https://jcenter.bintray.com/</url>
 	</repository>
 
 	<build>
