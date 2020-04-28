@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.0.RELEASE</version>
-	 	<packaging>pom</packaging>
+		<relativePath> ../Datamaps-3TM/pom.xml</relativePath>
 	</parent>
 	<groupId>fr.3tm</groupId>
 	<artifactId>DatasMap</artifactId>
