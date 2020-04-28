@@ -11,7 +11,7 @@ The project aims to display a map with the possibility of displaying various cur
 ## Contributors :
 students on BTS SIO on the Saint Ursule High School in Caen.
 
-Thomas Holley, Thomas Fontaine, Theo Marie
+@theomarie, @ThomasFont3721, @ThomasHolley
 
 
 ## Operators :
@@ -100,7 +100,10 @@ By executing the packaged app:
 java -jar target/myapplication-0.0.1-SNAPSHOT.jar
 ```
 
+### User ID and Password :
 
+**email :** user@user.user 
+**password :** user
 
 
 ## Screenshots
