@@ -65,7 +65,11 @@
 		    <artifactId>springboot-vuejs</artifactId>
 		    <version>1.0.12</version>
 		</dependency>
-		
+		<dependency>
+		  <groupId>com.byteowls</groupId>
+          <artifactId>jopencage</artifactId>
+          <version>1.2.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
