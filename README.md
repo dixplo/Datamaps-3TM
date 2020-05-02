@@ -64,7 +64,7 @@ Frameworks used
 ### API :
 API used
 
-- [Google Map](https://cloud.google.com/maps-platform).
+- [OpenStreetMap](https://www.openstreetmap.org).
 
 ### Deployment :
 Project deployment used
