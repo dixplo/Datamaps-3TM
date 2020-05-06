@@ -10,18 +10,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.github.jeemv.springboot.vuejs.VueJS;
 
 @Controller
-@RequestMapping("/test/")
 public class testController {
 	
 	@Autowired
 	private VueJS vue;
 
-	@GetMapping("hello")
+	@GetMapping(name = "vue")
 	public @ResponseBody String helloW(){
 		return "Hello Wolrd !";
 	}
 	
-	@GetMapping("")
+	@RequestMapping("/test")
 	public String maps(ModelMap map){
 		map.put("vue", vue);
 		return "index";
